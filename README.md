@@ -1,1 +1,3 @@
+<link rel="icon" type="image/x-icon" href="https://creatortipstelugu.github.io/fav.png">
+
 # about
