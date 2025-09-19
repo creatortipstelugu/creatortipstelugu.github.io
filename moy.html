@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Made on YouTube 2025 | Interactive Report</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Neutral Harmony with Red Accent -->
+    <!-- Application Structure Plan: The application is structured thematically to follow a logical creator workflow: Creation, Optimization, Connection, Monetization, and Safety. This task-oriented design is more intuitive for creators than a simple feature list. It begins with a high-level overview and a donut chart visualizing key investment areas, then allows users to dive into specific toolsets. Navigation is handled by a sticky header, and content is presented in interactive cards that reveal more detail on click. This structure was chosen to transform the unstructured source notes into a guided, easily digestible exploration of the new YouTube ecosystem. -->
+    <!-- Visualization & Content Choices: 
+        - Report Info: Key Areas of Investment (Creation, Connection, Business, AI). Goal: Inform on strategic priorities. Viz/Presentation: Donut Chart. Interaction: Hover tooltips. Justification: Quickly shows the proportional focus of YouTube's strategy. Library: Chart.js (Canvas).
+        - Report Info: All new features (e.g., V3, Ask Studio, Collabs). Goal: Organize and detail new tools. Viz/Presentation: Interactive cards with icons, titles, and descriptions. Interaction: Click to expand for more detail. Justification: Breaks down dense information into manageable, self-contained units that users can explore at their own pace. Method: HTML/CSS/JS.
+        - Report Info: $100 Billion Payout. Goal: Inform/Impact. Viz/Presentation: Key Stat/Metric card. Interaction: Static display. Justification: A powerful headline number to grab attention. Method: HTML/CSS.
+        - All choices support the thematic structure and avoid SVG/Mermaid in favor of Canvas and structured HTML/CSS for a fast, responsive, and maintainable single-page application. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f8fafc; /* slate-50 */
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 400px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 400px;
+            max-height: 50vh;
+        }
+        .nav-link {
+            transition: color 0.3s, border-color 0.3s;
+        }
+        .nav-link.active {
+            color: #ef4444; /* red-500 */
+            border-bottom-color: #ef4444; /* red-500 */
+        }
+        .feature-card .details {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-in-out, margin-top 0.5s ease-in-out;
+        }
+        .feature-card.open .details {
+            max-height: 500px; /* Adjust as needed */
+            margin-top: 1rem;
+        }
+        .feature-card.open .arrow {
+            transform: rotate(180deg);
+        }
+    </style>
+</head>
+<body class="text-slate-800">
+
+    <header id="header" class="bg-white/80 backdrop-blur-lg sticky top-0 z-50 shadow-sm">
+        <nav class="container mx-auto px-6 py-3 flex justify-between items-center">
+            <h1 class="text-xl md:text-2xl font-bold text-slate-900">
+                <span class="text-red-600">YouTube</span> Report 2025
+            </h1>
+            <div class="hidden md:flex space-x-6">
+                <a href="#overview" class="nav-link text-slate-600 hover:text-red-600 border-b-2 border-transparent pb-1">Overview</a>
+                <a href="#creation" class="nav-link text-slate-600 hover:text-red-600 border-b-2 border-transparent pb-1">Creation</a>
+                <a href="#optimization" class="nav-link text-slate-600 hover:text-red-600 border-b-2 border-transparent pb-1">Optimization</a>
+                <a href="#connection" class="nav-link text-slate-600 hover:text-red-600 border-b-2 border-transparent pb-1">Connection</a>
+                <a href="#monetization" class="nav-link text-slate-600 hover:text-red-600 border-b-2 border-transparent pb-1">Monetization</a>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container mx-auto px-6 py-8 md:py-12">
+
+        <section id="hero" class="text-center mb-16">
+            <h2 class="text-4xl md:text-5xl font-bold mb-4">The Future is Made on YouTube</h2>
+            <p class="text-lg text-slate-600 max-w-3xl mx-auto">
+                On September 18, 2025, YouTube unveiled a revolutionary suite of tools designed to empower creators like never before. This report provides an interactive overview of the powerful new features focusing on AI-driven creation, deeper audience connection, and smarter monetization.
+            </p>
+        </section>
+
+        <section id="overview" class="mb-20">
+            <h3 class="text-3xl font-bold text-center mb-4">Core Focus & Investment</h3>
+            <p class="text-md text-slate-600 max-w-2xl mx-auto text-center mb-10">This year's announcements signal a major investment in four key areas, with a clear emphasis on leveraging AI to simplify and enhance the entire creator lifecycle. The chart below illustrates the primary focus of the new tools and programs. This section provides the high-level strategy behind the individual features you can explore below.</p>
+            <div class="flex flex-wrap -mx-4 items-center">
+                <div class="w-full lg:w-1/2 px-4 mb-8 lg:mb-0">
+                    <div class="bg-white rounded-xl shadow-lg p-6">
+                        <h4 class="font-bold text-xl mb-4 text-center">Key Investment Areas</h4>
+                        <div class="chart-container">
+                            <canvas id="investmentChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+                <div class="w-full lg:w-1/2 px-4">
+                    <div class="space-y-6">
+                        <div class="bg-white rounded-xl shadow-lg p-6">
+                             <h4 class="text-2xl font-bold text-red-600 mb-2">$100 Billion+</h4>
+                             <p class="text-slate-600">Paid out to creators, artists, and media companies in the last four years, highlighting the growth of the creator economy.</p>
+                        </div>
+                        <div class="bg-white rounded-xl shadow-lg p-6">
+                            <h4 class="font-bold text-xl mb-2">The AI Co-Pilot</h4>
+                            <p class="text-slate-600">Generative AI is no longer just a tool, but an integrated partner in YouTube Studio, helping with everything from ideation and video creation to analytics and brand deals.</p>
+                        </div>
+                         <div class="bg-white rounded-xl shadow-lg p-6">
+                            <h4 class="font-bold text-xl mb-2">Connecting Communities</h4>
+                            <p class="text-slate-600">New collaboration and live streaming features are designed to break down barriers, helping creators share audiences and engage with fans in more dynamic, interactive ways.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div id="features">
+            
+            <section id="creation" class="mb-16 scroll-mt-20">
+                <h3 class="text-3xl font-bold text-center mb-4">AI-Powered Creation Tools</h3>
+                <p class="text-md text-slate-600 max-w-2xl mx-auto text-center mb-10">This section covers the groundbreaking generative AI tools that are changing how content is made. From creating video elements out of thin air to translating content for a global audience, these features are designed to lower the barrier to high-quality production and unlock new creative possibilities.</p>
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8" id="creation-features"></div>
+            </section>
+
+            <section id="optimization" class="mb-16 scroll-mt-20">
+                <h3 class="text-3xl font-bold text-center mb-4">Insights & Optimization</h3>
+                 <p class="text-md text-slate-600 max-w-2xl mx-auto text-center mb-10">Discover how AI is providing deeper insights into channel performance. This section explores tools that allow creators to have a conversation with their analytics, test content strategies with real data, and understand their audience's emotional connection to their videos.</p>
+                <div class="grid md:grid-cols-2 gap-8" id="optimization-features"></div>
+            </section>
+
+            <section id="connection" class="mb-16 scroll-mt-20">
+                <h3 class="text-3xl font-bold text-center mb-4">Audience Connection & Collaboration</h3>
+                <p class="text-md text-slate-600 max-w-2xl mx-auto text-center mb-10">Building a community is key. Here, we look at the new features that facilitate creator collaborations and more engaging live streaming formats. These tools help creators share audiences, interact in real-time, and repurpose live content effortlessly.</p>
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8" id="connection-features"></div>
+            </section>
+
+            <section id="monetization" class="mb-16 scroll-mt-20">
+                <h3 class="text-3xl font-bold text-center mb-4">Smarter Monetization & Brand Deals</h3>
+                 <p class="text-md text-slate-600 max-w-2xl mx-auto text-center mb-10">This section details the evolution of earning on YouTube. Explore flexible, dynamic new ways to integrate brand deals, streamline YouTube Shopping, and create new revenue opportunities, giving creators more control and advertisers more effective options.</p>
+                <div class="grid md:grid-cols-2 gap-8" id="monetization-features"></div>
+            </section>
+
+        </div>
+    </main>
+
+    <footer class="bg-slate-800 text-white mt-16">
+        <div class="container mx-auto px-6 py-8 text-center">
+            <p>Interactive Report created based on "Made on YouTube" 2025 event announcements.</p>
+            <p class="text-sm text-slate-400 mt-2">This is a conceptual summary and not an official YouTube publication.</p>
+        </div>
+    </footer>
+
+    <script>
+        const featuresData = {
+            creation: [
+                {
+                    icon: '🎨',
+                    title: 'Generative Video with V3',
+                    short: 'Googles latest generative video model, V3, is now integrated directly into the Shorts camera for powerful on-the-fly creation.',
+                    long: 'This tool allows creators to generate and add completely new objects or even stylized effects (like cartoons) into existing video footage. It also includes the ability to generate audio and sound effects within the V3 interface, making Shorts creation faster and more imaginative.'
+                },
+                {
+                    icon: '🌐',
+                    title: 'AI Auto-Dubbing & Lip Sync',
+                    short: 'Translate your content for a global audience with AI-powered audio dubbing and realistic lip reanimation.',
+                    long: 'The existing auto-dubbing feature has been upgraded to reanimate a speaker\'s lip movements to match the translated audio track, making dubbed content look more natural and professional. This significantly lowers the barrier to reaching international audiences.'
+                },
+                {
+                    icon: '✂️',
+                    title: 'AI Clipping for Podcasts & Live',
+                    short: 'Gemini now scans long-form content to identify the best moments and suggest ready-to-post Shorts.',
+                    long: 'This powerful tool helps podcasters and live streamers effortlessly repurpose their content. It analyzes streams and full episodes to find viral-worthy moments, automatically generating clips that creators can review and post, with future updates allowing for more customized Short creation.'
+                },
+                {
+                    icon: '🏃',
+                    title: 'Animate from Motion',
+                    short: 'Animate a still image or reanimate your whole body using text prompts or by mimicking a trending video.',
+                    long: 'This feature brings a new level of dynamic motion to content. Creators can upload an image and animate it with a simple text command, or use a popular dance or motion from another video as a template to reanimate their own footage.'
+                },
+            ],
+            optimization: [
+                {
+                    icon: '💬',
+                    title: 'Ask Studio AI Assistant',
+                    short: 'A new conversational AI partner built into YouTube Studio to help you understand your channel\'s performance.',
+                    long: 'Instead of digging through analytics, you can now ask natural language questions like "What were my top 5 thumbnails last month by CTR?" or "Which country is my audience growing fastest in?". Studio can even help generate log lines to describe your channel to brands.'
+                },
+                {
+                    icon: '🧪',
+                    title: 'A/B Title & Thumbnail Testing',
+                    short: 'Test up to three different thumbnails and titles for a single video to see which performs best.',
+                    long: 'This long-awaited feature gives creators the ability to get actual data on what resonates with their audience. YouTube will automatically show the different combinations to segments of your audience and then select the winner that generates the most watch time, optimizing your video\'s reach.'
+                },
+                {
+                    icon: '❤️',
+                    title: 'Emotional Connection Insights',
+                    short: 'Ask Studio can now surface comments that indicate a strong emotional connection from your viewers.',
+                    long: 'Moving beyond simple metrics, this AI-powered insight helps creators understand the qualitative impact of their videos. It identifies comments that express strong positive sentiment, helping to guide content strategy and identify what truly resonates with the community.'
+                },
+                {
+                    icon: '🛡️',
+                    title: 'AI Likeness Detection',
+                    short: 'A new tool for creators to identify and manage AI-generated content that replicates their likeness.',
+                    long: 'As part of YouTube\'s commitment to creator safety, this beta feature in the YouTube Partner Program helps creators find videos where their face or voice has been replicated by AI. It provides a system for managing this content, giving creators more control over their digital identity.'
+                },
+            ],
+            connection: [
+                {
+                    icon: '🤝',
+                    title: 'Official Collaborations',
+                    short: 'Officially add up to five creators as collaborators on a single video, sharing reach across all channels.',
+                    long: 'When a video is co-posted, it appears with all collaborator names and is distributed to the subscribers of every creator involved. This massive boost in reach is designed to encourage collaboration and help creators grow by cross-promoting to engaged audiences. A subscribe button for each channel is included.'
+                },
+                {
+                    icon: '📺',
+                    title: 'Dual-Format Live Streaming',
+                    short: 'Stream in both vertical and horizontal formats simultaneously from a single stream, reaching viewers on all surfaces.',
+                    long: 'This innovative tool sends your live stream to both the Shorts feed (vertical) and the standard horizontal video player. It features a combined chat and analytics window, so you can manage your entire audience in one place. AI also analyzes the stream to suggest highlight clips for Shorts.'
+                },
+                {
+                    icon: 'REACT',
+                    title: 'Live Reactions',
+                    short: 'Watch and react to other creators\' content live alongside your own audience.',
+                    long: 'This feature allows for a new format of collaborative and commentary content. You can pull up another creator\'s video or live stream and broadcast your real-time reactions to it, engaging your community in a shared viewing experience.'
+                }
+            ],
+            monetization: [
+                {
+                    icon: '💰',
+                    title: 'Dynamic Brand Segments',
+                    short: 'Dynamically insert and swap sponsored segments in your long-form videos, even long after they are published.',
+                    long: 'This provides incredible flexibility for brand deals. You can mark segments where sponsored content can be placed. This allows you to sell that slot to different brands in different countries, or update the sponsorship after the initial deal expires, creating new revenue from your back catalog.'
+                },
+                {
+                    icon: '🔗',
+                    title: 'Sponsor Links in Shorts',
+                    short: 'Creators can now add a clickable link to a brand\'s website directly within their Shorts.',
+                    long: 'A significant update for Shorts monetization, this feature provides a direct-response mechanism for brand partnerships. It makes it easier for creators to prove their value to sponsors and for viewers to engage with brands they discover in the Shorts feed.'
+                },
+                {
+                    icon: '🛍️',
+                    title: 'AI for YouTube Shopping',
+                    short: 'AI now automatically identifies products in your videos and suggests the best times to display shopping tags.',
+                    long: 'To streamline the process of tagging products, AI can analyze video content to find products and automatically add timestamps. With creator opt-in, it can also identify the most effective moments to surface product tags to viewers, maximizing the potential for sales.'
+                }
+            ]
+        };
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const investmentCtx = document.getElementById('investmentChart').getContext('2d');
+            new Chart(investmentCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['AI-Powered Products', 'Creation Tools', 'Connection & Community', 'Business & Monetization'],
+                    datasets: [{
+                        label: 'Key Investment Areas',
+                        data: [40, 25, 20, 15],
+                        backgroundColor: [
+                            'rgba(239, 68, 68, 0.8)', // red-500
+                            'rgba(59, 130, 246, 0.8)', // blue-500
+                            'rgba(249, 115, 22, 0.8)', // orange-500
+                            'rgba(34, 197, 94, 0.8)'  // green-500
+                        ],
+                        borderColor: '#f8fafc',
+                        borderWidth: 4,
+                        hoverOffset: 8
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                padding: 20,
+                                font: {
+                                    size: 14,
+                                }
+                            }
+                        },
+                        tooltip: {
+                            padding: 12,
+                            boxPadding: 4,
+                            titleFont: {
+                                weight: 'bold',
+                                size: 16,
+                            },
+                            bodyFont: {
+                                size: 14,
+                            },
+                        }
+                    },
+                    cutout: '60%'
+                }
+            });
+
+            const createFeatureCard = (feature) => {
+                const card = document.createElement('div');
+                card.className = 'feature-card bg-white rounded-xl shadow-lg p-6 cursor-pointer transform hover:scale-105 transition-transform duration-300';
+                card.innerHTML = `
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <span class="text-3xl mr-4">${feature.icon}</span>
+                            <h4 class="inline font-bold text-xl">${feature.title}</h4>
+                        </div>
+                        <span class="arrow text-2xl text-slate-400 transition-transform duration-300 transform">&#x25BC;</span>
+                    </div>
+                    <p class="text-slate-600 mt-2">${feature.short}</p>
+                    <div class="details text-slate-600 border-t border-slate-200 pt-4">
+                        <p>${feature.long}</p>
+                    </div>
+                `;
+                card.addEventListener('click', () => {
+                    card.classList.toggle('open');
+                });
+                return card;
+            };
+
+            const creationContainer = document.getElementById('creation-features');
+            featuresData.creation.forEach(feature => creationContainer.appendChild(createFeatureCard(feature)));
+
+            const optimizationContainer = document.getElementById('optimization-features');
+            featuresData.optimization.forEach(feature => optimizationContainer.appendChild(createFeatureCard(feature)));
+
+            const connectionContainer = document.getElementById('connection-features');
+            featuresData.connection.forEach(feature => connectionContainer.appendChild(createFeatureCard(feature)));
+            
+            const monetizationContainer = document.getElementById('monetization-features');
+            featuresData.monetization.forEach(feature => monetizationContainer.appendChild(createFeatureCard(feature)));
+
+
+            const navLinks = document.querySelectorAll('.nav-link');
+            const sections = document.querySelectorAll('main section[id]');
+
+            const observerOptions = {
+                root: null,
+                rootMargin: '-25% 0px -75% 0px',
+                threshold: 0
+            };
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const id = entry.target.getAttribute('id');
+                        navLinks.forEach(link => {
+                            link.classList.toggle('active', link.getAttribute('href') === `#${id}`);
+                        });
+                    }
+                });
+            }, observerOptions);
+
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+        });
+    </script>
+</body>
+</html>
