@@ -1,0 +1,936 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>YouTube Content Strategy</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0d0d0f;
+    --surface: #141418;
+    --surface2: #1c1c22;
+    --border: #2a2a32;
+    --accent: #ff6b2b;
+    --accent2: #ffb347;
+    --accent3: #7c5cfc;
+    --green: #3dd68c;
+    --red: #ff4d6d;
+    --blue: #38bdf8;
+    --text: #f0eee8;
+    --muted: #8a8a9a;
+    --muted2: #555568;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* ─── NOISE OVERLAY ─── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.5;
+  }
+
+  .page { position: relative; z-index: 1; max-width: 1100px; margin: 0 auto; padding: 0 32px 80px; }
+
+  /* ─── HERO ─── */
+  .hero {
+    padding: 70px 0 50px;
+    border-bottom: 1px solid var(--border);
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 40px;
+    align-items: end;
+  }
+  .hero-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255,107,43,0.12);
+    border: 1px solid rgba(255,107,43,0.3);
+    color: var(--accent);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 6px 14px;
+    border-radius: 100px;
+    margin-bottom: 24px;
+  }
+  .hero-tag::before { content: '▶'; font-size: 9px; }
+  .hero h1 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(38px, 5vw, 62px);
+    font-weight: 800;
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+  }
+  .hero h1 span { color: var(--accent); }
+  .hero-sub {
+    margin-top: 18px;
+    color: var(--muted);
+    font-size: 16px;
+    max-width: 520px;
+  }
+  .hero-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: flex-end;
+    text-align: right;
+    flex-shrink: 0;
+  }
+  .hero-badge {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 14px 20px;
+    font-size: 13px;
+    color: var(--muted);
+  }
+  .hero-badge strong { display: block; font-family: 'Syne', sans-serif; font-size: 22px; color: var(--text); }
+
+  /* ─── SECTION HEADERS ─── */
+  .sec-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin: 56px 0 28px;
+  }
+  .sec-num {
+    font-family: 'Syne', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+    background: rgba(255,107,43,0.1);
+    border: 1px solid rgba(255,107,43,0.2);
+    border-radius: 6px;
+    padding: 4px 10px;
+    flex-shrink: 0;
+  }
+  .sec-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 26px;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+  }
+  .sec-line { flex: 1; height: 1px; background: var(--border); }
+
+  /* ─── CARDS ─── */
+  .card-grid { display: grid; gap: 16px; }
+  .card-grid.cols-2 { grid-template-columns: repeat(2, 1fr); }
+  .card-grid.cols-3 { grid-template-columns: repeat(3, 1fr); }
+  .card-grid.cols-4 { grid-template-columns: repeat(4, 1fr); }
+
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 24px;
+    transition: border-color 0.2s, transform 0.2s;
+    position: relative;
+    overflow: hidden;
+  }
+  .card:hover { border-color: var(--muted2); transform: translateY(-2px); }
+  .card.accent-card { border-color: rgba(255,107,43,0.25); }
+  .card.accent-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+  }
+  .card.purple-card { border-color: rgba(124,92,252,0.25); }
+  .card.purple-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--accent3), #a78bfa);
+  }
+  .card.green-card { border-color: rgba(61,214,140,0.2); }
+  .card.green-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--green), #86efac);
+  }
+
+  .card-icon {
+    font-size: 28px;
+    margin-bottom: 14px;
+    display: block;
+  }
+  .card-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 6px;
+  }
+  .card h3 {
+    font-family: 'Syne', sans-serif;
+    font-size: 17px;
+    font-weight: 700;
+    margin-bottom: 10px;
+    letter-spacing: -0.01em;
+  }
+  .card p { font-size: 13.5px; color: var(--muted); line-height: 1.65; }
+
+  /* ─── PILLARS ─── */
+  .pillar {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 28px;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 20px;
+    align-items: start;
+  }
+  .pillar-num {
+    font-family: 'Syne', sans-serif;
+    font-size: 42px;
+    font-weight: 800;
+    line-height: 1;
+    color: var(--border);
+    min-width: 48px;
+    padding-top: 4px;
+  }
+  .pillar-body h3 {
+    font-family: 'Syne', sans-serif;
+    font-size: 19px;
+    font-weight: 700;
+    margin-bottom: 6px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .tag {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 3px 9px;
+    border-radius: 100px;
+  }
+  .tag.orange { background: rgba(255,107,43,0.15); color: var(--accent); }
+  .tag.purple { background: rgba(124,92,252,0.15); color: var(--accent3); }
+  .tag.green  { background: rgba(61,214,140,0.15); color: var(--green); }
+  .tag.blue   { background: rgba(56,189,248,0.15); color: var(--blue); }
+  .tag.yellow { background: rgba(255,179,71,0.15); color: var(--accent2); }
+
+  .pillar-body p { font-size: 13.5px; color: var(--muted); margin-bottom: 14px; }
+  .video-types { display: flex; flex-wrap: wrap; gap: 7px; }
+  .vtype {
+    font-size: 12px;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 4px 11px;
+    color: var(--muted);
+  }
+
+  /* ─── CALENDAR ─── */
+  .cal-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 8px;
+    margin-bottom: 8px;
+  }
+  .cal-day-head {
+    text-align: center;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted2);
+    padding: 8px 0;
+  }
+  .cal-slot {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 12px 10px;
+    min-height: 90px;
+    font-size: 12px;
+  }
+  .cal-slot.active { border-color: var(--border); }
+  .cal-slot.publish {
+    border-color: rgba(255,107,43,0.35);
+    background: rgba(255,107,43,0.05);
+  }
+  .cal-slot.live {
+    border-color: rgba(255,77,109,0.35);
+    background: rgba(255,77,109,0.05);
+  }
+  .cal-slot.rest { opacity: 0.35; }
+  .slot-type {
+    font-size: 9.5px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .slot-type.pub { color: var(--accent); }
+  .slot-type.live { color: var(--red); }
+  .slot-type.prep { color: var(--blue); }
+  .slot-desc { color: var(--muted); font-size: 12px; line-height: 1.4; }
+
+  /* ─── MONETIZATION TIMELINE ─── */
+  .timeline { position: relative; padding-left: 24px; }
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 8px; bottom: 8px;
+    width: 2px;
+    background: linear-gradient(to bottom, var(--accent), var(--accent3), var(--green));
+  }
+  .tl-item {
+    position: relative;
+    padding: 0 0 32px 28px;
+  }
+  .tl-dot {
+    position: absolute;
+    left: -31px;
+    top: 6px;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    border: 2px solid var(--bg);
+  }
+  .tl-dot.orange { background: var(--accent); }
+  .tl-dot.purple { background: var(--accent3); }
+  .tl-dot.green  { background: var(--green); }
+  .tl-phase {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 4px;
+  }
+  .tl-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 10px;
+  }
+  .tl-body {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 18px 20px;
+  }
+  .tl-body p { font-size: 13.5px; color: var(--muted); margin-bottom: 10px; }
+  .tl-body p:last-child { margin-bottom: 0; }
+  .tl-metrics { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 12px; }
+  .metric {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 8px 14px;
+    font-size: 12px;
+    color: var(--muted);
+  }
+  .metric strong { display: block; font-family: 'Syne', sans-serif; font-size: 15px; color: var(--text); }
+
+  /* ─── SEO TABLE ─── */
+  .seo-table { width: 100%; border-collapse: collapse; }
+  .seo-table th {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    padding: 10px 16px;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+  }
+  .seo-table td {
+    padding: 13px 16px;
+    font-size: 13.5px;
+    border-bottom: 1px solid rgba(42,42,50,0.6);
+    vertical-align: top;
+  }
+  .seo-table tr:last-child td { border-bottom: none; }
+  .seo-table tr:hover td { background: rgba(255,255,255,0.015); }
+  .seo-table tbody tr td:first-child { color: var(--text); }
+  .seo-table tbody tr td:not(:first-child) { color: var(--muted); }
+  .pill-wrap { display: flex; flex-wrap: wrap; gap: 5px; }
+  .s-pill {
+    font-size: 11px;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 2px 8px;
+    color: var(--muted);
+  }
+
+  /* ─── 90 DAY PLAN ─── */
+  .phase-block {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    overflow: hidden;
+    margin-bottom: 16px;
+  }
+  .phase-header {
+    padding: 18px 24px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    border-bottom: 1px solid var(--border);
+  }
+  .phase-icon {
+    width: 40px; height: 40px;
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px;
+    flex-shrink: 0;
+  }
+  .phase-icon.p1 { background: rgba(255,107,43,0.12); }
+  .phase-icon.p2 { background: rgba(124,92,252,0.12); }
+  .phase-icon.p3 { background: rgba(61,214,140,0.12); }
+  .phase-header h3 {
+    font-family: 'Syne', sans-serif;
+    font-size: 17px;
+    font-weight: 700;
+  }
+  .phase-header span { font-size: 13px; color: var(--muted); margin-top: 2px; display: block; }
+  .phase-body { padding: 20px 24px; }
+  .task-list { list-style: none; display: grid; gap: 10px; }
+  .task-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    font-size: 13.5px;
+    color: var(--muted);
+    line-height: 1.55;
+  }
+  .task-list li::before {
+    content: '→';
+    color: var(--accent);
+    flex-shrink: 0;
+    font-weight: 700;
+    margin-top: 1px;
+  }
+  .task-list li strong { color: var(--text); }
+
+  /* ─── CHECKLIST ─── */
+  .checklist { list-style: none; display: grid; gap: 10px; }
+  .checklist li {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    font-size: 13.5px;
+    color: var(--muted);
+  }
+  .chk {
+    width: 18px; height: 18px;
+    border: 1.5px solid var(--border);
+    border-radius: 5px;
+    flex-shrink: 0;
+    margin-top: 2px;
+    display: flex; align-items: center; justify-content: center;
+  }
+
+  /* ─── FOOTER ─── */
+  .footer {
+    margin-top: 60px;
+    padding-top: 28px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: gap;
+    color: var(--muted2);
+    font-size: 12px;
+  }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 720px) {
+    .page { padding: 0 18px 60px; }
+    .hero { grid-template-columns: 1fr; }
+    .hero-meta { align-items: flex-start; text-align: left; flex-direction: row; flex-wrap: wrap; }
+    .card-grid.cols-2, .card-grid.cols-3, .card-grid.cols-4 { grid-template-columns: 1fr; }
+    .cal-grid { grid-template-columns: repeat(3, 1fr); }
+  }
+
+  /* ─── DIVIDER ─── */
+  .divider { height: 1px; background: var(--border); margin: 16px 0; }
+
+  /* ─── INSIGHT BOX ─── */
+  .insight {
+    background: rgba(124,92,252,0.07);
+    border: 1px solid rgba(124,92,252,0.2);
+    border-left: 3px solid var(--accent3);
+    border-radius: 0 10px 10px 0;
+    padding: 16px 20px;
+    font-size: 13.5px;
+    color: var(--muted);
+    margin: 20px 0;
+  }
+  .insight strong { color: var(--text); }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- ─── HERO ─── -->
+  <div class="hero">
+    <div>
+      <div class="hero-tag">YouTube Content Strategy 2025</div>
+      <h1>Your Roadmap to<br><span>Monetization</span><br>in Telugu</h1>
+      <p class="hero-sub">A full-stack strategy for growing from 100→1K subscribers and unlocking AdSense + sponsorship revenue — built for a Telugu creator in the tech & tools space.</p>
+    </div>
+    <div class="hero-meta">
+      <div class="hero-badge"><strong>100→1K</strong>Subscriber Phase</div>
+      <div class="hero-badge"><strong>4</strong>Content Pillars</div>
+      <div class="hero-badge"><strong>90-Day</strong>Action Plan</div>
+    </div>
+  </div>
+
+
+  <!-- ─── 1. CHANNEL POSITIONING ─── -->
+  <div class="sec-header">
+    <span class="sec-num">01</span>
+    <h2 class="sec-title">Channel Positioning</h2>
+    <div class="sec-line"></div>
+  </div>
+
+  <div class="card-grid cols-3">
+    <div class="card accent-card">
+      <span class="card-icon">🎯</span>
+      <div class="card-label">Your Niche</div>
+      <h3>Telugu Tech Creator</h3>
+      <p>Tools, tutorials & AI tips explained in Telugu for aspiring creators and digital professionals in South India. You own a largely underserved niche.</p>
+    </div>
+    <div class="card purple-card">
+      <span class="card-icon">👤</span>
+      <div class="card-label">Target Audience</div>
+      <h3>Telugu-Speaking Creators</h3>
+      <p>Students, freelancers, small business owners & side-hustle builders aged 18–35 who want to learn digital skills in their native language.</p>
+    </div>
+    <div class="card green-card">
+      <span class="card-icon">💡</span>
+      <div class="card-label">Unique Value Prop</div>
+      <h3>Tech Made Local</h3>
+      <p>Complex tools explained in Telugu — no jargon, no barriers. You're the bridge between global digital tools and the Telugu-speaking world.</p>
+    </div>
+  </div>
+
+  <div class="insight">
+    <strong>Positioning Tip:</strong> Telugu tech content is severely underpenetrated on YouTube. Searching "ChatGPT Telugu", "Canva Telugu tutorials", or "AI tools Telugu" shows low competition with high search volume. Double down on Telugu-first SEO — it's your biggest competitive moat.
+  </div>
+
+
+  <!-- ─── 2. CONTENT PILLARS ─── -->
+  <div class="sec-header">
+    <span class="sec-num">02</span>
+    <h2 class="sec-title">Content Pillars</h2>
+    <div class="sec-line"></div>
+  </div>
+
+  <div class="card-grid cols-2" style="gap:14px;">
+
+    <div class="pillar">
+      <div class="pillar-num">01</div>
+      <div class="pillar-body">
+        <h3>AI Tools & Prompting <span class="tag orange">HIGH PRIORITY</span></h3>
+        <p>The fastest-growing interest area in Telugu content. Covers ChatGPT, Gemini, Claude, Midjourney, and prompt engineering. Every video has rewatch value.</p>
+        <div class="video-types">
+          <span class="vtype">ChatGPT in Telugu</span>
+          <span class="vtype">Prompt Writing Guide</span>
+          <span class="vtype">AI Image Tools</span>
+          <span class="vtype">AI for Business</span>
+          <span class="vtype">Free AI Tools Roundup</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="pillar">
+      <div class="pillar-num">02</div>
+      <div class="pillar-body">
+        <h3>Canva & Design <span class="tag blue">MONETIZABLE</span></h3>
+        <p>Canva has an affiliate program. Every tutorial video is a passive income opportunity. Focus on Canva for social media, thumbnails, reels, and presentations.</p>
+        <div class="video-types">
+          <span class="vtype">Canva Thumbnail Design</span>
+          <span class="vtype">Instagram Reels Design</span>
+          <span class="vtype">Canva AI Features</span>
+          <span class="vtype">Canva for Business</span>
+          <span class="vtype">Free Templates</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="pillar">
+      <div class="pillar-num">03</div>
+      <div class="pillar-body">
+        <h3>Video Editing & Production <span class="tag purple">HIGH SEARCH</span></h3>
+        <p>Evergreen content with consistent monthly search volume. Cover CapCut, DaVinci Resolve, and editing for Shorts. Perfect for beginner creators entering YouTube.</p>
+        <div class="video-types">
+          <span class="vtype">CapCut Tutorials</span>
+          <span class="vtype">Shorts Editing</span>
+          <span class="vtype">B-Roll Techniques</span>
+          <span class="vtype">Auto Captions</span>
+          <span class="vtype">Free Music Sites</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="pillar">
+      <div class="pillar-num">04</div>
+      <div class="pillar-body">
+        <h3>Social Media Growth <span class="tag green">COMMUNITY BUILDER</span></h3>
+        <p>Covers Instagram, LinkedIn, YouTube algorithm tips. Speaks directly to your audience's real goal: growing their own online presence. Strong engagement driver.</p>
+        <div class="video-types">
+          <span class="vtype">Instagram Growth 2025</span>
+          <span class="vtype">YouTube Algorithm Tips</span>
+          <span class="vtype">LinkedIn for Telugu Pros</span>
+          <span class="vtype">Shorts Strategy</span>
+          <span class="vtype">Analytics Explained</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+
+  <!-- ─── 3. CONTENT MIX ─── -->
+  <div class="sec-header">
+    <span class="sec-num">03</span>
+    <h2 class="sec-title">Video Formats & Content Mix</h2>
+    <div class="sec-line"></div>
+  </div>
+
+  <div class="card-grid cols-4">
+    <div class="card accent-card">
+      <span class="card-icon">🎬</span>
+      <div class="card-label">40% of Output</div>
+      <h3>Step-by-Step Tutorials</h3>
+      <p>8–15 min screencasts. Core SEO-driving content. Rank in search for years. "How to use X in Telugu."</p>
+    </div>
+    <div class="card purple-card">
+      <span class="card-icon">⚡</span>
+      <div class="card-label">30% of Output</div>
+      <h3>Shorts & Quick Tips</h3>
+      <p>30–60 sec vertical videos. Algorithm fuel for discovery. Repurpose every long video into 2–3 Shorts.</p>
+    </div>
+    <div class="card">
+      <span class="card-icon">🔴</span>
+      <div class="card-label">20% of Output</div>
+      <h3>Live Sessions</h3>
+      <p>Weekly Q&A or tool exploration. Builds community, boosts watch time metrics for monetization.</p>
+    </div>
+    <div class="card green-card">
+      <span class="card-icon">📋</span>
+      <div class="card-label">10% of Output</div>
+      <h3>Listicles & Reviews</h3>
+      <p>"Top 5 Free AI Tools", "Best Canva Alternatives." High CTR, great for affiliate linking.</p>
+    </div>
+  </div>
+
+
+  <!-- ─── 4. WEEKLY CONTENT CALENDAR ─── -->
+  <div class="sec-header">
+    <span class="sec-num">04</span>
+    <h2 class="sec-title">Weekly Content Calendar</h2>
+    <div class="sec-line"></div>
+  </div>
+
+  <div class="cal-grid">
+    <div class="cal-day-head">Mon</div>
+    <div class="cal-day-head">Tue</div>
+    <div class="cal-day-head">Wed</div>
+    <div class="cal-day-head">Thu</div>
+    <div class="cal-day-head">Fri</div>
+    <div class="cal-day-head">Sat</div>
+    <div class="cal-day-head">Sun</div>
+  </div>
+  <div class="cal-grid">
+    <div class="cal-slot">
+      <div class="slot-type prep">Prep</div>
+      <div class="slot-desc">Script & record main video. Keyword research for title.</div>
+    </div>
+    <div class="cal-slot">
+      <div class="slot-type prep">Edit</div>
+      <div class="slot-desc">Edit main video. Create thumbnail in Canva.</div>
+    </div>
+    <div class="cal-slot publish">
+      <div class="slot-type pub">📤 Publish</div>
+      <div class="slot-desc"><strong>Main video goes live</strong> — Tutorial or Tool Guide (8–15 min)</div>
+    </div>
+    <div class="cal-slot">
+      <div class="slot-type prep">Shorts</div>
+      <div class="slot-desc">Clip 2–3 Shorts from Wednesday's video. Add captions.</div>
+    </div>
+    <div class="cal-slot publish">
+      <div class="slot-type pub">⚡ Shorts</div>
+      <div class="slot-desc">Post 1–2 Shorts. Share on Instagram Reels + WhatsApp groups.</div>
+    </div>
+    <div class="cal-slot live">
+      <div class="slot-type live">🔴 Live</div>
+      <div class="slot-desc"><strong>Weekly live session</strong> — Q&A or live tool exploration</div>
+    </div>
+    <div class="cal-slot rest">
+      <div class="slot-type prep">Rest</div>
+      <div class="slot-desc">Review analytics. Plan next week's topic based on data.</div>
+    </div>
+  </div>
+
+  <div class="insight" style="margin-top:18px;">
+    <strong>Posting Frequency:</strong> 1 main video + 2 Shorts per week is the optimal balance for your current stage. This gives the algorithm enough to work with without burning you out. Consistency beats volume — same day, same time, every week.
+  </div>
+
+
+  <!-- ─── 5. SEO & TITLE STRATEGY ─── -->
+  <div class="sec-header">
+    <span class="sec-num">05</span>
+    <h2 class="sec-title">SEO & Title Strategy</h2>
+    <div class="sec-line"></div>
+  </div>
+
+  <table class="seo-table">
+    <thead>
+      <tr>
+        <th>Pillar</th>
+        <th>Title Formula</th>
+        <th>Example Title (Telugu SEO)</th>
+        <th>Target Keywords</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>🤖 AI Tools</td>
+        <td>[Tool Name] తో [Result] ఎలా చేయాలి</td>
+        <td>ChatGPT తో Telugu లో Content ఎలా రాయాలి | Beginners Guide</td>
+        <td><div class="pill-wrap"><span class="s-pill">ChatGPT Telugu</span><span class="s-pill">AI tools Telugu</span></div></td>
+      </tr>
+      <tr>
+        <td>🎨 Canva</td>
+        <td>[Use Case] కోసం Canva లో [Design]</td>
+        <td>YouTube Thumbnail Design Canva లో 5 నిమిషాల్లో | Free Template</td>
+        <td><div class="pill-wrap"><span class="s-pill">Canva Telugu</span><span class="s-pill">thumbnail design</span></div></td>
+      </tr>
+      <tr>
+        <td>✂️ Video Editing</td>
+        <td>[Software] Editing Complete Guide Telugu లో</td>
+        <td>CapCut Video Editing Tutorial Telugu | Reels & Shorts 2025</td>
+        <td><div class="pill-wrap"><span class="s-pill">CapCut Telugu</span><span class="s-pill">video editing Telugu</span></div></td>
+      </tr>
+      <tr>
+        <td>📈 Social Media</td>
+        <td>[Platform] లో Followers ఎలా పెంచుకోవాలి</td>
+        <td>Instagram Followers పెంచడం 2025 | Algorithm Secrets Telugu</td>
+        <td><div class="pill-wrap"><span class="s-pill">Instagram growth Telugu</span><span class="s-pill">social media tips</span></div></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="card-grid cols-3" style="margin-top:20px;">
+    <div class="card">
+      <div class="card-label">Thumbnail Rule</div>
+      <h3>Emotion + Text + Face</h3>
+      <p>Show your face with a strong reaction. Add 3–4 bold Telugu/English words. Use contrasting colors. Test 2 versions per video using YouTube's A/B tool.</p>
+    </div>
+    <div class="card">
+      <div class="card-label">Title Rule</div>
+      <h3>Telugu Word First</h3>
+      <p>Always start title with a Telugu keyword or "Telugu లో". This signals to YouTube's algorithm and Telugu-searching users simultaneously.</p>
+    </div>
+    <div class="card">
+      <div class="card-label">Description Rule</div>
+      <h3>First 2 Lines = Hook</h3>
+      <p>Pack your top 3 keywords in the first 150 characters (visible in search). Include timestamps, affiliate links, and a subscribe CTA below the fold.</p>
+    </div>
+  </div>
+
+
+  <!-- ─── 6. MONETIZATION ROADMAP ─── -->
+  <div class="sec-header">
+    <span class="sec-num">06</span>
+    <h2 class="sec-title">Monetization Roadmap</h2>
+    <div class="sec-line"></div>
+  </div>
+
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-dot orange"></div>
+      <div class="tl-phase">Phase 1 · Now → 1,000 Subscribers</div>
+      <div class="tl-title">Build the Foundation 🔶</div>
+      <div class="tl-body">
+        <p>Focus on affiliate income before AdSense — it doesn't require any subscriber or watch hour threshold. Sign up for <strong>Canva Affiliate</strong>, <strong>Envato Market</strong>, and <strong>Amazon Associates</strong>. Include affiliate links in every relevant video description.</p>
+        <p>Start a <strong>WhatsApp Community</strong> and <strong>Telegram Channel</strong> — these become your distribution channels and future sponsorship selling points.</p>
+        <div class="tl-metrics">
+          <div class="metric"><strong>Canva Affiliate</strong>Up to ₹3,000/referral</div>
+          <div class="metric"><strong>Telegram</strong>Build before 1K subs</div>
+          <div class="metric"><strong>Target</strong>1,000 subs + 4,000 hrs</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-dot purple"></div>
+      <div class="tl-phase">Phase 2 · 1,000+ Subscribers</div>
+      <div class="tl-title">Unlock AdSense + Micro-Sponsorships 💜</div>
+      <div class="tl-body">
+        <p>Apply for <strong>YouTube Partner Program</strong> the moment you hit 1,000 subs + 4,000 watch hours. Telugu content attracts Indian ad inventory, which pays reasonably well for tech/education CPM (₹80–₹250 per 1,000 views).</p>
+        <p>Simultaneously approach <strong>micro-sponsorships</strong> from tools you already use: CapCut, Notion, Canva Pro. A 15-second mid-roll mention can earn ₹3,000–₹8,000 per video at 1K–5K views if you have a hyper-targeted niche audience.</p>
+        <div class="tl-metrics">
+          <div class="metric"><strong>AdSense CPM</strong>₹80–₹250 (tech/edu)</div>
+          <div class="metric"><strong>Sponsorship</strong>₹3K–₹8K per mention</div>
+          <div class="metric"><strong>Affiliate</strong>Ongoing passive income</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-dot green"></div>
+      <div class="tl-phase">Phase 3 · 5,000–10,000 Subscribers</div>
+      <div class="tl-title">Scale with Courses & Brand Deals 🟢</div>
+      <div class="tl-body">
+        <p>Launch a <strong>paid Telugu course</strong> — "AI Tools for Telugu Creators" or "Complete Canva Masterclass in Telugu" on platforms like Teachable, Graphy, or Instamojo. Your existing community will be your first buyers. Price at ₹999–₹2,999.</p>
+        <p>By this point, approach <strong>larger tech brands</strong> (Wondershare, Adobe, Hostinger) for long-term brand deals. Brands pay 2x–5x more for Telugu creators vs. English creators for the same reach because of low supply and high brand demand in Tier-2/3 Indian cities.</p>
+        <div class="tl-metrics">
+          <div class="metric"><strong>Course Revenue</strong>₹50K–₹2L per launch</div>
+          <div class="metric"><strong>Brand Deals</strong>₹15K–₹50K per video</div>
+          <div class="metric"><strong>Combined Goal</strong>₹1L+/month</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ─── 7. GROWTH TACTICS ─── -->
+  <div class="sec-header">
+    <span class="sec-num">07</span>
+    <h2 class="sec-title">Growth Acceleration Tactics</h2>
+    <div class="sec-line"></div>
+  </div>
+
+  <div class="card-grid cols-2">
+    <div class="card">
+      <span class="card-icon">🤝</span>
+      <h3>Collabs with Telugu Creators</h3>
+      <p>Find Telugu creators in adjacent niches (finance, cooking, fashion) who have 500–5K subs. Do 1 collab per month. Both channels benefit from cross-pollination. Use YouTube's collab feature or a simple guest appearance.</p>
+    </div>
+    <div class="card accent-card">
+      <span class="card-icon">📱</span>
+      <h3>Repurpose to Instagram Reels</h3>
+      <p>Every Short you make should go to Instagram Reels the same day. Telugu creator content on Instagram is growing rapidly. Add your YouTube link in bio + every caption to drive cross-platform subs.</p>
+    </div>
+    <div class="card purple-card">
+      <span class="card-icon">👥</span>
+      <h3>Telugu Facebook Groups</h3>
+      <p>There are massive Telugu-speaking Facebook groups around tech, freelancing, and education. Post your videos (not just links — share as native video) in these groups. One viral share here can add 100+ subs overnight.</p>
+    </div>
+    <div class="card">
+      <span class="card-icon">🔁</span>
+      <h3>The Series Strategy</h3>
+      <p>Create 3–5 part series ("AI Tools A to Z in Telugu — Part 1, 2, 3"). Playlists dramatically increase watch time. Viewers who finish Part 1 watch Part 2. This is the fastest legal way to boost your watch hours for YPP.</p>
+    </div>
+    <div class="card green-card">
+      <span class="card-icon">🏆</span>
+      <h3>Community Posts</h3>
+      <p>Post 3× per week in the Community tab — polls, behind the scenes, upcoming video teasers. Channels that use Community posts get 20–40% higher notification click-through rates.</p>
+    </div>
+    <div class="card">
+      <span class="card-icon">💬</span>
+      <h3>Reply to Every Comment (First 48hrs)</h3>
+      <p>YouTube's algorithm rewards engagement signals in the first 48 hours. Reply to every comment in Telugu — it shows viewers you're approachable and builds loyalty that converts to channel memberships later.</p>
+    </div>
+  </div>
+
+
+  <!-- ─── 8. 90-DAY ACTION PLAN ─── -->
+  <div class="sec-header">
+    <span class="sec-num">08</span>
+    <h2 class="sec-title">90-Day Action Plan</h2>
+    <div class="sec-line"></div>
+  </div>
+
+  <div class="phase-block">
+    <div class="phase-header">
+      <div class="phase-icon p1">🚀</div>
+      <div>
+        <h3>Month 1 — Foundation & Consistency</h3>
+        <span>Days 1–30 · Goal: Publish 8+ videos, build systems</span>
+      </div>
+    </div>
+    <div class="phase-body">
+      <ul class="task-list">
+        <li><strong>Week 1:</strong> Audit your channel — optimize banner, bio, channel icon, and all sections with SEO-rich Telugu keywords.</li>
+        <li><strong>Week 1:</strong> Create channel trailer (60–90 sec) in Telugu that explains exactly what viewers will learn. Pin it for non-subscribers.</li>
+        <li><strong>Week 2:</strong> Sign up for Canva Affiliate Program, Amazon Associates, and set up a link-in-bio page (Linktree/Beacons) with all affiliate links organized.</li>
+        <li><strong>Week 2:</strong> Create a Telegram channel + WhatsApp community. Promote it in every video's CTA.</li>
+        <li><strong>Week 3–4:</strong> Publish 2 videos per week. Focus on AI tools and Canva (highest traffic keywords). Use the title formulas from Section 5.</li>
+        <li><strong>Ongoing:</strong> Post 2 Shorts per week repurposed from main videos. Enable automatic chapters for every long video.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="phase-block">
+    <div class="phase-header">
+      <div class="phase-icon p2">📈</div>
+      <div>
+        <h3>Month 2 — Growth & Engagement</h3>
+        <span>Days 31–60 · Goal: 500+ subs, 1,500 watch hours</span>
+      </div>
+    </div>
+    <div class="phase-body">
+      <ul class="task-list">
+        <li><strong>Week 5:</strong> Start your first content series — "AI Tools for Telugu Creators" (5-part series). Announce it publicly and create a playlist.</li>
+        <li><strong>Week 6:</strong> Do your first collaboration — reach out to 5 Telugu creators in adjacent niches for a guest appearance or dual-commentary video.</li>
+        <li><strong>Week 7:</strong> Host your first live session. Topic: "Ask me anything about digital tools." Promote 5 days in advance across all platforms.</li>
+        <li><strong>Week 7–8:</strong> Begin reaching out to micro-sponsors. Draft a simple media kit with your channel stats, audience demographics (Telugu, tech-focused, 18–35), and engagement rate.</li>
+        <li><strong>Ongoing:</strong> Share every video in 3–5 relevant Telugu Facebook groups and community forums. Track which groups drive the most clicks.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="phase-block">
+    <div class="phase-header">
+      <div class="phase-icon p3">💰</div>
+      <div>
+        <h3>Month 3 — Monetization Sprint</h3>
+        <span>Days 61–90 · Goal: Hit 1,000 subs + 4,000 hrs, first income</span>
+      </div>
+    </div>
+    <div class="phase-body">
+      <ul class="task-list">
+        <li><strong>Week 9:</strong> Publish a high-value "evergreen" video targeting a keyword you know has volume — "Best Free AI Tools Telugu 2025" or "Canva Complete Tutorial Telugu." This video should be 15–20 min, fully comprehensive.</li>
+        <li><strong>Week 10:</strong> Confirm first micro-sponsorship deal. A 15-second brand mention in 2 videos this month is the target.</li>
+        <li><strong>Week 11:</strong> Run a subscriber drive — announce a "1K Special" live session as incentive. Create countdown content on Community tab and Shorts.</li>
+        <li><strong>Week 12:</strong> Review full 90-day analytics. Identify your top 3 performing videos. Create sequels or updated versions of them immediately — these are your proven winners.</li>
+        <li><strong>Week 12:</strong> Apply for YouTube Partner Program the moment thresholds are met. Begin planning your first paid digital product (mini-course or Notion template) for Month 4 onwards.</li>
+      </ul>
+    </div>
+  </div>
+
+
+  <!-- ─── FOOTER ─── -->
+  <div class="footer">
+    <span>YouTube Content Strategy · Telugu Creator Channel · 2025</span>
+    <span>Tools Tutorials & Tips for Content Creators</span>
+  </div>
+
+</div>
+</body>
+</html>
