@@ -1,0 +1,1573 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Content Creation Checklist</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f5f3ee;
+    --surface: #ffffff;
+    --surface2: #f0ede6;
+    --border: #e0dbd0;
+    --border2: #ccc7ba;
+    --text: #1a1814;
+    --muted: #6b6658;
+    --muted2: #9b9485;
+    --accent: #d4500a;
+    --accent-bg: #fff0e8;
+    --accent-border: #f0c4a8;
+    --purple: #5a3fc0;
+    --purple-bg: #eeebff;
+    --purple-border: #c4b8f0;
+    --green: #1a7a4a;
+    --green-bg: #e6f7ee;
+    --green-border: #a8dfc0;
+    --blue: #0e6fa8;
+    --blue-bg: #e6f4ff;
+    --blue-border: #a8d8f0;
+    --yellow: #a06800;
+    --yellow-bg: #fff8e0;
+    --yellow-border: #f0d888;
+    --red: #c0263a;
+    --red-bg: #fff0f2;
+    --red-border: #f0b8c0;
+    --teal: #0e7a72;
+    --teal-bg: #e6f7f5;
+    --teal-border: #a8dcd8;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+  .page { max-width: 1080px; margin: 0 auto; padding: 0 32px 80px; }
+
+  /* ─── HERO ─── */
+  .hero {
+    padding: 60px 0 44px;
+    border-bottom: 2px solid var(--text);
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 40px;
+    align-items: end;
+  }
+  .hero-eyebrow {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .hero-eyebrow::before {
+    content: '';
+    display: inline-block;
+    width: 24px;
+    height: 2px;
+    background: var(--accent);
+  }
+  .hero h1 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(34px, 4.5vw, 56px);
+    font-weight: 800;
+    line-height: 1.0;
+    letter-spacing: -0.03em;
+  }
+  .hero h1 em {
+    font-style: normal;
+    color: var(--accent);
+    position: relative;
+  }
+  .hero-sub {
+    margin-top: 16px;
+    color: var(--muted);
+    font-size: 15px;
+    max-width: 480px;
+  }
+  .stats-col {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    flex-shrink: 0;
+  }
+  .stat-box {
+    background: var(--surface);
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    padding: 12px 18px;
+    text-align: center;
+  }
+  .stat-box strong {
+    display: block;
+    font-family: 'Syne', sans-serif;
+    font-size: 26px;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    color: var(--text);
+  }
+  .stat-box span { font-size: 11px; color: var(--muted); font-weight: 500; }
+
+  /* ─── PHASE NAVIGATION ─── */
+  .phase-nav {
+    display: flex;
+    gap: 0;
+    margin: 40px 0 0;
+    overflow-x: auto;
+    border: 1.5px solid var(--border2);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+  .phase-pill {
+    flex: 1;
+    padding: 14px 10px;
+    text-align: center;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    border-right: 1.5px solid var(--border2);
+    min-width: 90px;
+    white-space: nowrap;
+  }
+  .phase-pill:last-child { border-right: none; }
+  .phase-pill.p1 { background: var(--accent-bg); color: var(--accent); }
+  .phase-pill.p2 { background: var(--purple-bg); color: var(--purple); }
+  .phase-pill.p3 { background: var(--blue-bg); color: var(--blue); }
+  .phase-pill.p4 { background: var(--yellow-bg); color: var(--yellow); }
+  .phase-pill.p5 { background: var(--green-bg); color: var(--green); }
+  .phase-pill.p6 { background: var(--teal-bg); color: var(--teal); }
+  .phase-pill.p7 { background: var(--red-bg); color: var(--red); }
+  .phase-num { font-size: 16px; display: block; margin-bottom: 2px; }
+
+  /* ─── SECTION ─── */
+  .section { margin-top: 52px; }
+  .section-head {
+    display: flex;
+    align-items: flex-start;
+    gap: 18px;
+    margin-bottom: 24px;
+    padding-bottom: 18px;
+    border-bottom: 1.5px solid var(--border);
+  }
+  .section-icon {
+    width: 48px; height: 48px;
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px;
+    flex-shrink: 0;
+    border: 1.5px solid transparent;
+  }
+  .section-icon.c1 { background: var(--accent-bg); border-color: var(--accent-border); }
+  .section-icon.c2 { background: var(--purple-bg); border-color: var(--purple-border); }
+  .section-icon.c3 { background: var(--blue-bg); border-color: var(--blue-border); }
+  .section-icon.c4 { background: var(--yellow-bg); border-color: var(--yellow-border); }
+  .section-icon.c5 { background: var(--green-bg); border-color: var(--green-border); }
+  .section-icon.c6 { background: var(--teal-bg); border-color: var(--teal-border); }
+  .section-icon.c7 { background: var(--red-bg); border-color: var(--red-border); }
+
+  .section-title-wrap { flex: 1; }
+  .section-phase {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .section-phase.c1 { color: var(--accent); }
+  .section-phase.c2 { color: var(--purple); }
+  .section-phase.c3 { color: var(--blue); }
+  .section-phase.c4 { color: var(--yellow); }
+  .section-phase.c5 { color: var(--green); }
+  .section-phase.c6 { color: var(--teal); }
+  .section-phase.c7 { color: var(--red); }
+
+  .section-head h2 {
+    font-family: 'Syne', sans-serif;
+    font-size: 22px;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+  }
+  .section-head p { font-size: 13px; color: var(--muted); margin-top: 4px; }
+  .item-count {
+    font-family: 'Syne', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    background: var(--surface2);
+    border: 1.5px solid var(--border);
+    border-radius: 8px;
+    padding: 6px 12px;
+    color: var(--muted);
+    flex-shrink: 0;
+    align-self: flex-start;
+    margin-top: 4px;
+    white-space: nowrap;
+  }
+
+  /* ─── CHECKLIST GROUPS ─── */
+  .check-groups { display: grid; gap: 14px; }
+  .check-group {
+    background: var(--surface);
+    border: 1.5px solid var(--border);
+    border-radius: 14px;
+    overflow: hidden;
+  }
+  .group-header {
+    padding: 13px 20px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--surface2);
+  }
+  .group-emoji { font-size: 15px; }
+  .group-title {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--muted);
+    flex: 1;
+  }
+  .group-badge {
+    font-size: 10px;
+    font-weight: 700;
+    padding: 2px 9px;
+    border-radius: 100px;
+    letter-spacing: 0.06em;
+  }
+  .badge-must { background: var(--accent-bg); color: var(--accent); border: 1px solid var(--accent-border); }
+  .badge-pro  { background: var(--purple-bg); color: var(--purple); border: 1px solid var(--purple-border); }
+  .badge-once { background: var(--yellow-bg); color: var(--yellow); border: 1px solid var(--yellow-border); }
+  .badge-opt  { background: var(--surface2); color: var(--muted); border: 1px solid var(--border); }
+  .badge-live { background: var(--red-bg); color: var(--red); border: 1px solid var(--red-border); }
+  .badge-seo  { background: var(--green-bg); color: var(--green); border: 1px solid var(--green-border); }
+  .badge-grow { background: var(--teal-bg); color: var(--teal); border: 1px solid var(--teal-border); }
+
+  .check-list { list-style: none; }
+  .check-item {
+    display: grid;
+    grid-template-columns: 24px 1fr;
+    gap: 12px;
+    padding: 11px 20px;
+    border-bottom: 1px solid var(--border);
+    align-items: flex-start;
+    transition: background 0.15s;
+  }
+  .check-item:last-child { border-bottom: none; }
+  .check-item:hover { background: var(--surface2); }
+  .checkbox {
+    width: 18px; height: 18px;
+    border: 1.5px solid var(--border2);
+    border-radius: 5px;
+    flex-shrink: 0;
+    margin-top: 1px;
+    background: white;
+    cursor: pointer;
+    transition: all 0.15s;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .checkbox:hover { border-color: var(--accent); }
+  .checkbox.checked {
+    background: var(--accent);
+    border-color: var(--accent);
+  }
+  .checkbox.checked::after {
+    content: '✓';
+    color: white;
+    font-size: 11px;
+    font-weight: 700;
+  }
+  .item-content { flex: 1; }
+  .item-main { font-size: 13.5px; color: var(--text); font-weight: 400; line-height: 1.5; }
+  .item-main strong { font-weight: 600; }
+  .item-note { font-size: 12px; color: var(--muted); margin-top: 3px; line-height: 1.4; }
+  .item-note code {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 1px 5px;
+    font-family: monospace;
+    font-size: 11px;
+    color: var(--text);
+  }
+
+  /* ─── DIVIDER ─── */
+  .divider {
+    height: 1.5px;
+    background: var(--border);
+    margin: 48px 0 0;
+  }
+
+  /* ─── TIP BOX ─── */
+  .tip-box {
+    border-radius: 10px;
+    padding: 14px 18px;
+    font-size: 13px;
+    margin-top: 16px;
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    border: 1.5px solid transparent;
+  }
+  .tip-box.orange { background: var(--accent-bg); border-color: var(--accent-border); color: #7a2a00; }
+  .tip-box.purple { background: var(--purple-bg); border-color: var(--purple-border); color: #2a1a70; }
+  .tip-box.green  { background: var(--green-bg);  border-color: var(--green-border);  color: #0a4a28; }
+  .tip-box.blue   { background: var(--blue-bg);   border-color: var(--blue-border);   color: #063a5a; }
+  .tip-box.yellow { background: var(--yellow-bg); border-color: var(--yellow-border); color: #5a3800; }
+  .tip-box.teal   { background: var(--teal-bg);   border-color: var(--teal-border);   color: #044038; }
+  .tip-icon { font-size: 17px; flex-shrink: 0; margin-top: 1px; }
+  .tip-box strong { font-weight: 600; }
+  .tip-box p { margin-top: 3px; }
+
+  /* ─── PROGRESS TRACKER ─── */
+  .progress-bar-wrap {
+    background: var(--surface);
+    border: 1.5px solid var(--border);
+    border-radius: 14px;
+    padding: 20px 24px;
+    margin-top: 48px;
+  }
+  .progress-label {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    font-size: 13px;
+    font-weight: 600;
+  }
+  .progress-label span { color: var(--muted); }
+  #progress-text { font-family: 'Syne', sans-serif; font-size: 15px; color: var(--accent); }
+  .progress-track {
+    width: 100%;
+    height: 8px;
+    background: var(--surface2);
+    border-radius: 100px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+  }
+  #progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--accent), #f0842a);
+    border-radius: 100px;
+    width: 0%;
+    transition: width 0.4s ease;
+  }
+  .progress-phases {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 8px;
+    margin-top: 14px;
+  }
+  .phase-prog {
+    text-align: center;
+    font-size: 10px;
+    font-weight: 600;
+    color: var(--muted2);
+    letter-spacing: 0.04em;
+  }
+  .phase-prog span { display: block; font-family: 'Syne', sans-serif; font-size: 14px; color: var(--text); margin-bottom: 2px; }
+
+  /* ─── FOOTER ─── */
+  .footer {
+    margin-top: 60px;
+    padding-top: 24px;
+    border-top: 1.5px solid var(--text);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--muted);
+    font-size: 12px;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .footer strong { color: var(--text); font-family: 'Syne', sans-serif; }
+
+  @media (max-width: 700px) {
+    .page { padding: 0 16px 60px; }
+    .hero { grid-template-columns: 1fr; }
+    .stats-col { flex-direction: row; }
+    .progress-phases { grid-template-columns: repeat(4, 1fr); }
+  }
+
+  /* ─── PRINT / COMPLETED STYLES ─── */
+  .check-item.completed .item-main { text-decoration: line-through; color: var(--muted2); }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div>
+      <div class="hero-eyebrow">Telugu Creator Channel</div>
+      <h1>Complete Content<br>Creation <em>Checklist</em></h1>
+      <p class="hero-sub">Every task, every phase — from first idea to post-publish growth. Follow this checklist for every single video you create.</p>
+    </div>
+    <div class="stats-col">
+      <div class="stat-box"><strong>7</strong><span>Phases</span></div>
+      <div class="stat-box"><strong id="total-count">70+</strong><span>Checklist Items</span></div>
+      <div class="stat-box"><strong>100%</strong><span>Coverage</span></div>
+    </div>
+  </div>
+
+  <!-- PHASE NAV -->
+  <div class="phase-nav">
+    <div class="phase-pill p1"><span class="phase-num">💡</span>Pre-Production</div>
+    <div class="phase-pill p2"><span class="phase-num">🎬</span>Production</div>
+    <div class="phase-pill p3"><span class="phase-num">✂️</span>Editing</div>
+    <div class="phase-pill p4"><span class="phase-num">🖼️</span>Thumbnail</div>
+    <div class="phase-pill p5"><span class="phase-num">📤</span>Upload & SEO</div>
+    <div class="phase-pill p6"><span class="phase-num">🚀</span>Post-Publish</div>
+    <div class="phase-pill p7"><span class="phase-num">📊</span>Analytics</div>
+  </div>
+
+  <!-- PROGRESS TRACKER -->
+  <div class="progress-bar-wrap">
+    <div class="progress-label">
+      <strong>Your Progress</strong>
+      <span id="progress-text">0 / <span id="total-display">0</span> completed</span>
+    </div>
+    <div class="progress-track"><div id="progress-fill"></div></div>
+    <div class="progress-phases">
+      <div class="phase-prog"><span id="p1-count">0/0</span>Pre-Prod</div>
+      <div class="phase-prog"><span id="p2-count">0/0</span>Production</div>
+      <div class="phase-prog"><span id="p3-count">0/0</span>Editing</div>
+      <div class="phase-prog"><span id="p4-count">0/0</span>Thumbnail</div>
+      <div class="phase-prog"><span id="p5-count">0/0</span>Upload</div>
+      <div class="phase-prog"><span id="p6-count">0/0</span>Post-Pub</div>
+      <div class="phase-prog"><span id="p7-count">0/0</span>Analytics</div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════
+       PHASE 1: PRE-PRODUCTION
+  ════════════════════════════════════════════════════ -->
+  <div class="section" data-phase="p1">
+    <div class="section-head">
+      <div class="section-icon c1">💡</div>
+      <div class="section-title-wrap">
+        <div class="section-phase c1">Phase 1</div>
+        <h2>Pre-Production</h2>
+        <p>Idea, research, scripting, and preparation before you press record</p>
+      </div>
+      <div class="item-count">2–3 Days Before</div>
+    </div>
+
+    <div class="check-groups">
+
+      <div class="check-group">
+        <div class="group-header">
+          <span class="group-emoji">🔍</span>
+          <span class="group-title">Idea & Keyword Research</span>
+          <span class="group-badge badge-must">Must Do</span>
+        </div>
+        <ul class="check-list">
+          <li class="check-item">
+            <div class="checkbox" onclick="toggle(this)"></div>
+            <div class="item-content">
+              <div class="item-main">Search your topic idea on YouTube in <strong>Telugu + English</strong> to validate demand</div>
+              <div class="item-note">Example: search "ChatGPT Telugu" and "ChatGPT tutorial Telugu" — check if top videos have 10K+ views. High views = proven demand.</div>
+            </div>
+          </li>
+          <li class="check-item">
+            <div class="checkbox" onclick="toggle(this)"></div>
+            <div class="item-content">
+              <div class="item-main">Use <strong>YouTube Search Autocomplete</strong> to find exact long-tail keywords</div>
+              <div class="item-note">Type your topic in YouTube's search bar and note all autocomplete suggestions — these are real searches. Include them in title, description & tags.</div>
+            </div>
+          </li>
+          <li class="check-item">
+            <div class="checkbox" onclick="toggle(this)"></div>
+            <div class="item-content">
+              <div class="item-main">Check <strong>Google Trends India</strong> to confirm the topic is trending or evergreen</div>
+              <div class="item-note">Visit trends.google.com → set region to India → search your topic. Choose topics with stable or rising interest lines.</div>
+            </div>
+          </li>
+          <li class="check-item">
+            <div class="checkbox" onclick="toggle(this)"></div>
+            <div class="item-content">
+              <div class="item-main">Identify your <strong>primary keyword</strong> (1 phrase) and <strong>3–5 secondary keywords</strong> for SEO</div>
+              <div class="item-note">Primary keyword goes in title + first line of description. Secondary keywords go in description body and tags. Example: Primary = "Canva tutorial Telugu", Secondary = "Canva for beginners", "free Canva templates".</div>
+            </div>
+          </li>
+          <li class="check-item">
+            <div class="checkbox" onclick="toggle(this)"></div>
+            <div class="item-content">
+              <div class="item-main">Study the <strong>top 3 videos</strong> on your topic — note what they covered and what they missed</div>
+              <div class="item-note">Your video should fill a gap — cover something they missed, or explain it better/simpler in Telugu. This is your competitive angle.</div>
+            </div>
+          </li>
+          <li class="check-item">
+            <div class="checkbox" onclick="toggle(this)"></div>
+            <div class="item-content">
+              <div class="item-main">Confirm the video fits one of your <strong>4 content pillars</strong> (AI Tools / Canva / Video Editing / Social Media)</div>
+              <div class="item-note">If it doesn't fit a pillar, assess if it's a one-off or signals a new recurring theme. Avoid random off-topic videos — they confuse the algorithm.</div>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <div class="check-group">
+        <div class="group-header">
+          <span class="group-emoji">📝</span>
+          <span class="group-title">Script & Structure</span>
+          <span class="group-badge badge-must">Must Do</span>
+        </div>
+        <ul class="check-list">
+          <li class="check-item">
+            <div class="checkbox" onclick="toggle(this)"></div>
+            <div class="item-content">
+              <div class="item-main">Write a <strong>Hook (first 30 seconds)</strong> — state the problem, promise the result, tease what they'll learn</div>
+              <div class="item-note">Example hook: "క్రియేటర్లకు content రాయడానికి గంటలు పడుతుందా? ఈ video చూసిన తర్వాత 10 నిమిషాల్లో complete script తయారవుతుంది — AI తో!"</div>
+            </div>
+          </li>
+          <li class="check-item">
+            <div class="checkbox" onclick="toggle(this)"></div>
+            <div class="item-content">
+              <div class="item-main">Outline the video in <strong>3–5 clear sections</strong> with timestamps planned in advance</div>
+              <div class="item-note">Pre-planned timestamps help you stay on track while recording and make it easier to add chapters on YouTube later.</div>
+            </div>
+          </li>
+          <li class="check-item">
+            <div class="checkbox" onclick="toggle(this)"></div>
+            <div class="item-content">
+              <div class="item-main">Write or bullet-point the <strong>full script or talking points</strong> for each section</div>
+              <div class="item-note">For tutorials: write exact steps. For opinion/tip videos: write bullet points you'll expand on. Avoid reading word-for-word — it sounds unnatural.</div>
+            </div>
+          </li>
+          <li class="check-item">
+            <div class="checkbox" onclick="toggle(this)"></div>
+            <div class="item-content">
+              <div class="item-main">Plan a <strong>mid-video CTA</strong> (subscribe reminder or community link) around the 40–50% mark</div>
+              <div class="item-note">Research shows mid-video CTAs outperform end-screen CTAs by 3x in click-through rate. Keep it natural: "నీకు ఇది useful గా అనిపిస్తే subscribe చేయి."</div>
+            </div>
+          </li>
+          <li class="check-item">
+            <div class="checkbox" onclick="toggle(this)"></div>
+            <div class="item-content">
+              <div class="item-main">Plan a <strong>strong ending</strong> — summary, CTA for next video, and subscribe prompt</div>
+              <div class="item-note">End with: (1) Quick recap in 2–3 sentences, (2) Tease the next video, (3) Direct subscribe ask. Example: "Next week నేను [topic] గురించి explain చేస్తాను — miss అవ్వకు."</div>
+            </div>
+          </li>
+          <li class="check-item">
+            <div class="checkbox" onclick="toggle(this)"></div>
+            <div class="item-content">
+              <div class="item-main">Identify <strong>affiliate links or product mentions</strong> to include naturally in the script</div>
+              <div class="item-note">Don't force it — only include links for tools you're actually demonstrating. Plan exactly where in the script to mention them so it feels organic.</div>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <div class="check-group">
+        <div class="group-header">
+          <span class="group-emoji">⚙️</span>
+          <span class="group-title">Technical Setup & Preparation</span>
+          <span class="group-badge badge-must">Must Do</span>
+        </div>
+        <ul class="check-list">
+          <li class="check-item">
+            <div class="checkbox" onclick="toggle(this)"></div>
+            <div class="item-content">
+              <div class="item-main">Set up your <strong>recording environment</strong> — clean background, good lighting (ring light or window light)</div>
+              <div class="item-note">For screen recordings: ensure your desktop is clean and notifications are turned OFF (Do Not Disturb mode). For face-cam: sit facing a light source.</div>
+            </div>
+          </li>
+          <li class="check-item">
+            <div class="checkbox" onclick="toggle(this)"></div>
+            <div class="item-content">
+              <div class="item-main">Test <strong>audio quality</strong> — record a 10-second test and play it back before main recording</div>
+              <div class="item-note">Audio is more important than video quality on YouTube. If it sounds muffled or echoey, fix it before recording. Use a lapel mic if available.</div>
+            </div>
+          </li>
+          <li class="check-item">
+            <div class="checkbox" onclick="toggle(this)"></div>
+            <div class="item-content">
+              <div class="item-main">Set screen resolution to <strong>1920×1080 (1080p)</strong> before any screen recording</div>
+              <div class="item-note">This ensures your final video exports at crisp full HD. Lower resolution screen recordings look blurry when YouTube renders them.</div>
+            </div>
+          </li>
+          <li class="check-item">
+            <div class="checkbox" onclick="toggle(this)"></div>
+            <div class="item-content">
+              <div class="item-main">Open all apps/websites/tools you'll demonstrate before hitting record</div>
+              <div class="item-note">Avoid watching apps load or waiting for browser tabs during the recording — it kills pacing. Pre-open everything and have sample files/projects ready.</div>
+            </div>
+          </li>
+          <li class="check-item">
+            <div class="checkbox" onclick="toggle(this)"></div>
+            <div class="item-content">
+              <div class="item-main">Check <strong>storage space</strong> on your device — ensure you have at least 10 GB free</div>
+              <div class="item-note">Raw screen recordings can be 2–5 GB for a 15-minute video. Running out of storage mid-record corrupts the file.</div>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <div class="tip-box orange">
+        <span class="tip-icon">💡</span>
+        <div><strong>Pre-Production Shortcut:</strong> Keep a running "video ideas" list in Notion or Google Keep. Whenever you discover a new tool, a viewer asks a question, or you see a trending topic, add it immediately. Never start a recording session without a keyword-validated idea.</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════
+       PHASE 2: PRODUCTION / RECORDING
+  ════════════════════════════════════════════════════ -->
+  <div class="divider"></div>
+  <div class="section" data-phase="p2">
+    <div class="section-head">
+      <div class="section-icon c2">🎬</div>
+      <div class="section-title-wrap">
+        <div class="section-phase c2">Phase 2</div>
+        <h2>Production / Recording</h2>
+        <p>Best practices while recording your video to save time in editing</p>
+      </div>
+      <div class="item-count">Recording Day</div>
+    </div>
+
+    <div class="check-groups">
+
+      <div class="check-group">
+        <div class="group-header">
+          <span class="group-emoji">🎙️</span>
+          <span class="group-title">Before You Hit Record</span>
+          <span class="group-badge badge-must">Must Do</span>
+        </div>
+        <ul class="check-list">
+          <li class="check-item">
+            <div class="checkbox" onclick="toggle(this)"></div>
+            <div class="item-content">
+              <div class="item-main">Do a <strong>30-second warm-up</strong> — speak out loud to warm up your voice before recording</div>
+              <div class="item-note">Read any Telugu text out loud or have a short conversation. Cold recordings sound flat and lack energy.</div>
+            </div>
+          </li>
+          <li class="check-item">
+            <div class="checkbox" onclick="toggle(this)"></div>
+            <div class="item-content">
+              <div class="item-main">Turn on <strong>Do Not Disturb</strong> on all devices — phone, computer, and smart watch</div>
+            </div>
+          </li>
+          <li class="check-item">
+            <div class="checkbox" onclick="toggle(this)"></div>
+            <div class="item-content">
+              <div class="item-main">Close all <strong>unnecessary browser tabs and background apps</strong> (especially those with audio or notifications)</div>
+            </div>
+          </li>
+          <li class="check-item">
+            <div class="checkbox" onclick="toggle(this)"></div>
+            <div class="item-content">
+              <div class="item-main">Have your <strong>script or bullet points visible</strong> on a second screen or printed sheet — NOT on the screen you're recording</div>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <div class="check-group">
+        <div class="group-header">
+          <span class="group-emoji">🎥</span>
+          <span class="group-title">While Recording</span>
+          <span class="group-badge badge-must">Must Do</span>
+        </div>
+        <ul class="check-list">
+          <li class="check-item">
+            <div class="checkbox" onclick="toggle(this)"></div>
+            <div class="item-content">
+              <div class="item-main">Record a <strong>clap or loud sound at the start</strong> to create an easy sync point if recording audio and video separately</div>
+            </div>
+          </li>
+          <li class="check-item">
+            <div class="checkbox" onclick="toggle(this)"></div>
+            <div class="item-content">
+              <div class="item-main">Speak <strong>10–15% slower than your natural speed</strong> — listeners need time to process Telugu tech vocabulary</div>
+              <div class="item-note">You can speed up in editing. You cannot slow down without robotic distortion. Always record slower than needed.</div>
+            </div>
+          </li>
+          <li class="check-item">
+            <div class="checkbox" onclick="toggle(this)"></div>
+            <div class="item-content">
+              <div class="item-main">If you make a mistake, <strong>pause 3 seconds and redo the sentence</strong> — don't stop the recording</div>
+              <div class="item-note">The pause creates a visible spike in your audio waveform, making mistakes easy to find and cut in editing. Much faster than restarting.</div>
+            </div>
+          </li>
+          <li class="check-item">
+            <div class="checkbox" onclick="toggle(this)"></div>
+            <div class="item-content">
+              <div class="item-main">Zoom into relevant UI elements during screen recordings — <strong>use Ctrl + scroll</strong> or zoom tools so viewers can clearly read text</div>
+            </div>
+          </li>
+          <li class="check-item">
+            <div class="checkbox" onclick="toggle(this)"></div>
+            <div class="item-content">
+              <div class="item-main">Move your <strong>mouse slowly and deliberately</strong> during screen recordings — fast mouse movement confuses viewers</div>
+            </div>
+          </li>
+          <li class="check-item">
+            <div class="checkbox" onclick="toggle(this)"></div>
+            <div class="item-content">
+              <div class="item-main">Record <strong>15–20 seconds of silence</strong> at the beginning and end — useful for adding intro/outro music in editing</div>
+            </div>
+          </li>
+          <li class="check-item">
+            <div class="checkbox" onclick="toggle(this)"></div>
+            <div class="item-content">
+              <div class="item-main">For face-cam: maintain <strong>eye contact with the camera lens</strong>, not the screen — it creates a direct connection with the viewer</div>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <div class="check-group">
+        <div class="group-header">
+          <span class="group-emoji">📦</span>
+          <span class="group-title">Shorts Raw Material</span>
+          <span class="group-badge badge-pro">Pro Move</span>
+        </div>
+        <ul class="check-list">
+          <li class="check-item">
+            <div class="checkbox" onclick="toggle(this)"></div>
+            <div class="item-content">
+              <div class="item-main">Identify <strong>2–3 standalone tips or moments</strong> during recording that could become YouTube Shorts</div>
+              <div class="item-note">Note the timestamp when you say them. Example: "minute 7:30 — the AI prompt trick — good Short." These don't need re-recording, just trimming.</div>
+            </div>
+          </li>
+          <li class="check-item">
+            <div class="checkbox" onclick="toggle(this)"></div>
+            <div class="item-content">
+              <div class="item-main">Record a <strong>vertical format intro</strong> (30 seconds, 9:16 aspect ratio) for each Short if possible</div>
+              <div class="item-note">Shorts recorded vertically perform better than cropped horizontal. Record on your phone right after the main recording while the topic is fresh.</div>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════
+       PHASE 3: EDITING
+  ════════════════════════════════════════════════════ -->
+  <div class="divider"></div>
+  <div class="section" data-phase="p3">
+    <div class="section-head">
+      <div class="section-icon c3">✂️</div>
+      <div class="section-title-wrap">
+        <div class="section-phase c3">Phase 3</div>
+        <h2>Video Editing</h2>
+        <p>Cutting, polishing, adding graphics, captions, and audio treatment</p>
+      </div>
+      <div class="item-count">1–2 Days</div>
+    </div>
+
+    <div class="check-groups">
+
+      <div class="check-group">
+        <div class="group-header">
+          <span class="group-emoji">✂️</span>
+          <span class="group-title">Basic Cuts & Structure</span>
+          <span class="group-badge badge-must">Must Do</span>
+        </div>
+        <ul class="check-list">
+          <li class="check-item">
+            <div class="checkbox" onclick="toggle(this)"></div>
+            <div class="item-content">
+              <div class="item-main">Cut all <strong>long pauses, filler words</strong> (um, uh, అా...) and dead silence longer than 1 second</div>
+              <div class="item-note">This alone typically reduces video length by 20–30% and dramatically improves pacing and watch time.</div>
+            </div>
+          </li>
+          <li class="check-item">
+            <div class="checkbox" onclick="toggle(this)"></div>
+            <div class="item-content">
+              <div class="item-main">Add a <strong>branded intro</strong> (5–8 seconds max) — logo animation or your channel's standard opener</div>
+              <div class="item-note">Keep it short. Viewers skip intros longer than 8 seconds. The actual hook should start at second 0, with the intro bumper at the very end of the hook.</div>
+            </div>
+          </li>
+          <li class="check-item">
+            <div class="checkbox" onclick="toggle(this)"></div>
+            <div class="item-content">
+              <div class="item-main">Add <strong>section title cards</strong> between major sections to visually organize the video</div>
+              <div class="item-note">Example: "Step 1: Install the Tool", "Step 2: Basic Settings", "Pro Tip". These also become chapter timestamps.</div>
+            </div>
+          </li>
+          <li class="check-item">
+            <div class="checkbox" onclick="toggle(this)"></div>
+            <div class="item-content">
+              <div class="item-main">Add a <strong>branded outro (10–15 seconds)</strong> with end screen — include subscribe button and link to related video</div>
+            </div>
+          </li>
+          <li class="check-item">
+            <div class="checkbox" onclick="toggle(this)"></div>
+            <div class="item-content">
+              <div class="item-main">Verify the final video length is appropriate: <strong>8–15 min for tutorials, 5–8 min for tip videos</strong></div>
+              <div class="item-note">Videos under 8 minutes earn less AdSense (no mid-roll ads). Over 15 minutes risks drop-off. Sweet spot: 10–13 minutes for your content type.</div>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <div class="check-group">
+        <div class="group-header">
+          <span class="group-emoji">🔊</span>
+          <span class="group-title">Audio Treatment</span>
+          <span class="group-badge badge-must">Must Do</span>
+        </div>
+        <ul class="check-list">
+          <li class="check-item">
+            <div class="checkbox" onclick="toggle(this)"></div>
+            <div class="item-content">
+              <div class="item-main">Apply <strong>noise reduction</strong> on your voice track to remove background hiss or fan noise</div>
+              <div class="item-note">CapCut has a free "Noise Reduction" filter. In DaVinci Resolve, use the Voice Isolation or Noise Reduction effect. Apply subtly — over-processing sounds robotic.</div>
+            </div>
+          </li>
+          <li class="check-item">
+            <div class="checkbox" onclick="toggle(this)"></div>
+            <div class="item-content">
+              <div class="item-main">Normalize audio volume so your voice stays between <strong>-12 dB and -6 dB</strong> throughout</div>
+              <div class="item-note">Uneven volume (loud in some places, quiet in others) is the #1 reason viewers use headphones and then abandon a video. Keep it consistent.</div>
+            </div>
+          </li>
+          <li class="check-item">
+            <div class="checkbox" onclick="toggle(this)"></div>
+            <div class="item-content">
+              <div class="item-main">Add <strong>background music</strong> at low volume (10–15% of voice volume) — use copyright-free sources only</div>
+              <div class="item-note">Free sources: YouTube Audio Library, Pixabay Music, Epidemic Sound (paid). Music should be soft and non-distracting — lo-fi or ambient works best for tutorials.</div>
+            </div>
+          </li>
+          <li class="check-item">
+            <div class="checkbox" onclick="toggle(this)"></div>
+            <div class="item-content">
+              <div class="item-main">Add <strong>sound effects</strong> for transitions, button clicks, or emphasis moments (optional but adds production quality)</div>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <div class="check-group">
+        <div class="group-header">
+          <span class="group-emoji">💬</span>
+          <span class="group-title">Captions & Text</span>
+          <span class="group-badge badge-must">Must Do</span>
+        </div>
+        <ul class="check-list">
+          <li class="check-item">
+            <div class="checkbox" onclick="toggle(this)"></div>
+            <div class="item-content">
+              <div class="item-main">Add <strong>Telugu subtitles/captions</strong> to the video — auto-generate and correct errors</div>
+              <div class="item-note">YouTube's auto-captions for Telugu are improving but still error-prone. Review and fix. Captions keep viewers watching in silent mode (commuters, public spaces).</div>
+            </div>
+          </li>
+          <li class="check-item">
+            <div class="checkbox" onclick="toggle(this)"></div>
+            <div class="item-content">
+              <div class="item-main">Highlight <strong>key terms, tool names, and important steps</strong> with on-screen text overlays</div>
+              <div class="item-note">When you say "ఇక్కడ Settings menu లో API Key enter చేయాలి" — show "API Key" as a text callout on screen. This reinforces learning for non-native English readers.</div>
+            </div>
+          </li>
+          <li class="check-item">
+            <div class="checkbox" onclick="toggle(this)"></div>
+            <div class="item-content">
+              <div class="item-main">Add a <strong>subscribe reminder graphic</strong> at the 40–50% mark of the video (animated bell icon or banner)</div>
+            </div>
+          </li>
+          <li class="check-item">
+            <div class="checkbox" onclick="toggle(this)"></div>
+            <div class="item-content">
+              <div class="item-main">Add <strong>zoom effects</strong> on important UI elements during screen recordings so they're clearly visible</div>
+              <div class="item-note">Use CapCut's zoom/magnify effect or manually scale the clip. Buttons and menu items that look tiny on your screen look microscopic to viewers.</div>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <div class="check-group">
+        <div class="group-header">
+          <span class="group-emoji">🎞️</span>
+          <span class="group-title">Export Settings</span>
+          <span class="group-badge badge-must">Must Do</span>
+        </div>
+        <ul class="check-list">
+          <li class="check-item">
+            <div class="checkbox" onclick="toggle(this)"></div>
+            <div class="item-content">
+              <div class="item-main">Export at <strong>1920×1080 (1080p), 30fps (or 60fps for smooth screen content)</strong></div>
+            </div>
+          </li>
+          <li class="check-item">
+            <div class="checkbox" onclick="toggle(this)"></div>
+            <div class="item-content">
+              <div class="item-main">Export format: <strong>MP4 with H.264 codec</strong> — optimal file size to quality ratio for YouTube</div>
+              <div class="item-note">Target file size: 1–3 GB for a 10–15 min video. Larger files take longer to upload and process but quality is marginally better — not worth it.</div>
+            </div>
+          </li>
+          <li class="check-item">
+            <div class="checkbox" onclick="toggle(this)"></div>
+            <div class="item-content">
+              <div class="item-main">Watch the <strong>full exported video once</strong> before uploading — check audio sync, look for visual glitches</div>
+              <div class="item-note">It takes 10–15 minutes but saves you from the embarrassment of re-uploading. At least watch the first 2 minutes and random segments throughout.</div>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <div class="check-group">
+        <div class="group-header">
+          <span class="group-emoji">⚡</span>
+          <span class="group-title">Shorts Editing</span>
+          <span class="group-badge badge-pro">Pro Move</span>
+        </div>
+        <ul class="check-list">
+          <li class="check-item">
+            <div class="checkbox" onclick="toggle(this)"></div>
+            <div class="item-content">
+              <div class="item-main">Create <strong>2 Shorts</strong> from the main video — crop to 9:16 vertical, trim to 30–60 seconds</div>
+              <div class="item-note">Best Short material: the single best tip, a surprising result, or a quick "before/after" transformation. The first 2 seconds must immediately grab attention.</div>
+            </div>
+          </li>
+          <li class="check-item">
+            <div class="checkbox" onclick="toggle(this)"></div>
+            <div class="item-content">
+              <div class="item-main">Add <strong>large-font captions</strong> to Shorts — 80% of Shorts are watched without sound on mobile</div>
+            </div>
+          </li>
+          <li class="check-item">
+            <div class="checkbox" onclick="toggle(this)"></div>
+            <div class="item-content">
+              <div class="item-main">Add a <strong>"Watch full video" text/card</strong> at the end of each Short to drive traffic to the main video</div>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════
+       PHASE 4: THUMBNAIL CREATION
+  ════════════════════════════════════════════════════ -->
+  <div class="divider"></div>
+  <div class="section" data-phase="p4">
+    <div class="section-head">
+      <div class="section-icon c4">🖼️</div>
+      <div class="section-title-wrap">
+        <div class="section-phase c4">Phase 4</div>
+        <h2>Thumbnail Creation</h2>
+        <p>The most important click-driver — your thumbnail is your billboard</p>
+      </div>
+      <div class="item-count">Same Day as Edit</div>
+    </div>
+
+    <div class="check-groups">
+
+      <div class="check-group">
+        <div class="group-header">
+          <span class="group-emoji">🖼️</span>
+          <span class="group-title">Thumbnail Design (in Canva)</span>
+          <span class="group-badge badge-must">Must Do</span>
+        </div>
+        <ul class="check-list">
+          <li class="check-item">
+            <div class="checkbox" onclick="toggle(this)"></div>
+            <div class="item-content">
+              <div class="item-main">Create thumbnail at exactly <strong>1280 × 720 px</strong> in Canva</div>
+            </div>
+          </li>
+          <li class="check-item">
+            <div class="checkbox" onclick="toggle(this)"></div>
+            <div class="item-content">
+              <div class="item-main">Include <strong>your face with a strong, relevant emotion</strong> — surprise, excitement, or pointing at the result</div>
+              <div class="item-note">Thumbnails with human faces get 38% higher CTR on average. Avoid neutral/blank expressions — they don't communicate emotion or urgency.</div>
+            </div>
+          </li>
+          <li class="check-item">
+            <div class="checkbox" onclick="toggle(this)"></div>
+            <div class="item-content">
+              <div class="item-main">Add <strong>3–5 bold words maximum</strong> in Telugu and/or English — readable at mobile thumbnail size (120px wide)</div>
+              <div class="item-note">Test by zooming out to 25% in Canva — if you can still read the text, it's large enough. Use a bold condensed font at minimum 80px.</div>
+            </div>
+          </li>
+          <li class="check-item">
+            <div class="checkbox" onclick="toggle(this)"></div>
+            <div class="item-content">
+              <div class="item-main">Use <strong>high-contrast colors</strong> — the thumbnail should pop against YouTube's white and dark backgrounds</div>
+              <div class="item-note">Yellow, red, and orange on dark backgrounds have the highest contrast. Avoid pastel-on-white — it's invisible in feeds.</div>
+            </div>
+          </li>
+          <li class="check-item">
+            <div class="checkbox" onclick="toggle(this)"></div>
+            <div class="item-content">
+              <div class="item-main">Include a <strong>visual result or screenshot</strong> of what the viewer will achieve by watching</div>
+              <div class="item-note">For AI tools: show the AI-generated output. For Canva: show the final design. For video editing: show the before/after. Results-driven thumbnails beat concept thumbnails every time.</div>
+            </div>
+          </li>
+          <li class="check-item">
+            <div class="checkbox" onclick="toggle(this)"></div>
+            <div class="item-content">
+              <div class="item-main">Use your <strong>channel's consistent brand colors and font</strong> — viewers should recognize your thumbnails in 0.5 seconds</div>
+              <div class="item-note">Pick 2–3 brand colors and 1 font style. Use them in every thumbnail. Brand recognition in feeds is what converts casual viewers into subscribers.</div>
+            </div>
+          </li>
+          <li class="check-item">
+            <div class="checkbox" onclick="toggle(this)"></div>
+            <div class="item-content">
+              <div class="item-main">Export thumbnail as <strong>JPG, under 2 MB</strong> file size</div>
+            </div>
+          </li>
+          <li class="check-item">
+            <div class="checkbox" onclick="toggle(this)"></div>
+            <div class="item-content">
+              <div class="item-main">Check thumbnail on your phone screen — if it looks good at mobile size, it looks good everywhere</div>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <div class="check-group">
+        <div class="group-header">
+          <span class="group-emoji">🧪</span>
+          <span class="group-title">Thumbnail Testing</span>
+          <span class="group-badge badge-pro">Pro Move</span>
+        </div>
+        <ul class="check-list">
+          <li class="check-item">
+            <div class="checkbox" onclick="toggle(this)"></div>
+            <div class="item-content">
+              <div class="item-main">Create <strong>2 different thumbnail versions</strong> — different color scheme or different text angle</div>
+              <div class="item-note">Use YouTube's built-in A/B test feature (YouTube Studio → Video → Test & Compare) to find the winner after 48 hours. Swap to the winner permanently.</div>
+            </div>
+          </li>
+          <li class="check-item">
+            <div class="checkbox" onclick="toggle(this)"></div>
+            <div class="item-content">
+              <div class="item-main">Ask in your <strong>Telegram/WhatsApp community</strong> which thumbnail they'd click — quick community poll</div>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <div class="tip-box yellow">
+        <span class="tip-icon">🏆</span>
+        <div><strong>Telugu Thumbnail Tip:</strong> Add the word "Telugu లో" or "తెలుగు" visibly on your thumbnail. Telugu-speaking viewers actively scan thumbnails for language signals — this can boost your CTR by 20–40% within your niche audience.</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════
+       PHASE 5: UPLOAD & SEO
+  ════════════════════════════════════════════════════ -->
+  <div class="divider"></div>
+  <div class="section" data-phase="p5">
+    <div class="section-head">
+      <div class="section-icon c5">📤</div>
+      <div class="section-title-wrap">
+        <div class="section-phase c5">Phase 5</div>
+        <h2>Upload & YouTube SEO</h2>
+        <p>Optimize every metadata field so YouTube can find and recommend your video</p>
+      </div>
+      <div class="item-count">Upload Day</div>
+    </div>
+
+    <div class="check-groups">
+
+      <div class="check-group">
+        <div class="group-header">
+          <span class="group-emoji">✍️</span>
+          <span class="group-title">Title Optimization</span>
+          <span class="group-badge badge-seo">SEO Critical</span>
+        </div>
+        <ul class="check-list">
+          <li class="check-item">
+            <div class="checkbox" onclick="toggle(this)"></div>
+            <div class="item-content">
+              <div class="item-main">Start the title with your <strong>primary keyword in Telugu</strong> (the most-searched phrase)</div>
+              <div class="item-note">Formula: <code>[Topic] Telugu లో | [Benefit/Result] [Year]</code> — Example: "ChatGPT Telugu లో | Content Writing 10 నిమిషాల్లో 2025"</div>
+            </div>
+          </li>
+          <li class="check-item">
+            <div class="checkbox" onclick="toggle(this)"></div>
+            <div class="item-content">
+              <div class="item-main">Keep title <strong>under 70 characters</strong> — longer titles get truncated in search results</div>
+            </div>
+          </li>
+          <li class="check-item">
+            <div class="checkbox" onclick="toggle(this)"></div>
+            <div class="item-content">
+              <div class="item-main">Include a <strong>number, power word, or year</strong> in the title for higher CTR</div>
+              <div class="item-note">Words that boost CTR: "Complete", "Free", "Beginners", "2025", "Secret", "Step-by-Step", numbers like "5 tools", "10 minutes".</div>
+            </div>
+          </li>
+          <li class="check-item">
+            <div class="checkbox" onclick="toggle(this)"></div>
+            <div class="item-content">
+              <div class="item-main">Use <strong>pipe ( | ) to separate the main title from a secondary hook</strong></div>
+              <div class="item-note">Example: "Canva Tutorial Telugu | Beginners Complete Guide 2025". The second part catches viewers who search differently.</div>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <div class="check-group">
+        <div class="group-header">
+          <span class="group-emoji">📄</span>
+          <span class="group-title">Description Optimization</span>
+          <span class="group-badge badge-seo">SEO Critical</span>
+        </div>
+        <ul class="check-list">
+          <li class="check-item">
+            <div class="checkbox" onclick="toggle(this)"></div>
+            <div class="item-content">
+              <div class="item-main">Write a <strong>compelling first 2 lines (150 characters)</strong> with primary keyword — this is what shows in search results</div>
+              <div class="item-note">Example: "ఈ video లో Canva తో professional YouTube thumbnails ఎలా design చేయాలో step-by-step Telugu లో నేర్చుకోండి."</div>
+            </div>
+          </li>
+          <li class="check-item">
+            <div class="checkbox" onclick="toggle(this)"></div>
+            <div class="item-content">
+              <div class="item-main">Add <strong>video chapters/timestamps</strong> using <code>0:00 - Section Name</code> format</div>
+              <div class="item-note">Chapters improve watch time (viewers jump to relevant parts instead of leaving), boost SEO, and show up as chapter previews in Google search.</div>
+            </div>
+          </li>
+          <li class="check-item">
+            <div class="checkbox" onclick="toggle(this)"></div>
+            <div class="item-content">
+              <div class="item-main">Include all <strong>affiliate links with clear labels</strong> — Canva, tools demonstrated, etc.</div>
+              <div class="item-note">Always add: "🔗 Canva Pro Free Trial: [your affiliate link]". Disclose it's an affiliate link as required by YouTube policy.</div>
+            </div>
+          </li>
+          <li class="check-item">
+            <div class="checkbox" onclick="toggle(this)"></div>
+            <div class="item-content">
+              <div class="item-main">Add links to your <strong>Telegram, WhatsApp Community, and Instagram</strong></div>
+            </div>
+          </li>
+          <li class="check-item">
+            <div class="checkbox" onclick="toggle(this)"></div>
+            <div class="item-content">
+              <div class="item-main">Naturally include <strong>secondary keywords</strong> (3–5 times each) in the description body</div>
+              <div class="item-note">Don't stuff — write naturally. "ఈ tutorial లో AI tools for content creators, ChatGPT prompts, and Telugu digital tools explain చేశాను."</div>
+            </div>
+          </li>
+          <li class="check-item">
+            <div class="checkbox" onclick="toggle(this)"></div>
+            <div class="item-content">
+              <div class="item-main">Add a standard <strong>boilerplate footer</strong> to every description — About Me, channel links, contact email</div>
+              <div class="item-note">Save this as a template in Notion so you paste it in every video without retyping. Saves 5 minutes per upload.</div>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <div class="check-group">
+        <div class="group-header">
+          <span class="group-emoji">🏷️</span>
+          <span class="group-title">Tags, Cards & Settings</span>
+          <span class="group-badge badge-seo">SEO Critical</span>
+        </div>
+        <ul class="check-list">
+          <li class="check-item">
+            <div class="checkbox" onclick="toggle(this)"></div>
+            <div class="item-content">
+              <div class="item-main">Add <strong>15–20 tags</strong> — primary keyword first, then variations, then broader category tags</div>
+              <div class="item-note">Tags: exact phrase → variations → broader. Example: "Canva Tutorial Telugu" → "Canva Beginners Telugu" → "Canva Tutorial" → "Graphic Design Telugu" → "Content Creator Telugu".</div>
+            </div>
+          </li>
+          <li class="check-item">
+            <div class="checkbox" onclick="toggle(this)"></div>
+            <div class="item-content">
+              <div class="item-main">Set the correct <strong>video Category</strong> — "Howto & Style" or "Science & Technology" for your content</div>
+            </div>
+          </li>
+          <li class="check-item">
+            <div class="checkbox" onclick="toggle(this)"></div>
+            <div class="item-content">
+              <div class="item-main">Add the video to the relevant <strong>Playlist</strong> (AI Tools, Canva, Video Editing, or Social Media)</div>
+              <div class="item-note">Playlists increase session watch time as YouTube auto-plays the next video. Always add to at least one playlist.</div>
+            </div>
+          </li>
+          <li class="check-item">
+            <div class="checkbox" onclick="toggle(this)"></div>
+            <div class="item-content">
+              <div class="item-main">Add <strong>2 info cards</strong> at relevant moments — link to a related video and to your most-watched video</div>
+              <div class="item-note">Place cards at points where viewers might leave (after a key tip is delivered) to redirect them to another video rather than lose them.</div>
+            </div>
+          </li>
+          <li class="check-item">
+            <div class="checkbox" onclick="toggle(this)"></div>
+            <div class="item-content">
+              <div class="item-main">Add <strong>end screen elements</strong> — Subscribe button, 2 video recommendations, in the last 20 seconds</div>
+            </div>
+          </li>
+          <li class="check-item">
+            <div class="checkbox" onclick="toggle(this)"></div>
+            <div class="item-content">
+              <div class="item-main">Upload <strong>custom captions/subtitle file</strong> if you have them, or enable auto-captions and select Telugu</div>
+            </div>
+          </li>
+          <li class="check-item">
+            <div class="checkbox" onclick="toggle(this)"></div>
+            <div class="item-content">
+              <div class="item-main">Set <strong>Audience to "Not made for kids"</strong> and confirm no age restriction is needed</div>
+            </div>
+          </li>
+          <li class="check-item">
+            <div class="checkbox" onclick="toggle(this)"></div>
+            <div class="item-content">
+              <div class="item-main">Disclose any <strong>paid promotions or affiliate content</strong> using YouTube's built-in disclosure checkbox</div>
+            </div>
+          </li>
+          <li class="check-item">
+            <div class="checkbox" onclick="toggle(this)"></div>
+            <div class="item-content">
+              <div class="item-main"><strong>Schedule the video</strong> for your consistent upload day and time (recommended: Wednesday 6–8 PM IST)</div>
+              <div class="item-note">Consistency in upload schedule trains both the algorithm and your audience. 6–8 PM IST has peak Telugu-speaking viewer activity.</div>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <div class="tip-box green">
+        <span class="tip-icon">🔍</span>
+        <div><strong>SEO Multiplier:</strong> After uploading, search your exact video title on Google within 24 hours. If it appears in Google Search results (which it will for Telugu content), share that Google Search link in your Telegram community — it adds a powerful backlink signal.</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════
+       PHASE 6: POST-PUBLISH PROMOTION
+  ════════════════════════════════════════════════════ -->
+  <div class="divider"></div>
+  <div class="section" data-phase="p6">
+    <div class="section-head">
+      <div class="section-icon c6">🚀</div>
+      <div class="section-title-wrap">
+        <div class="section-phase c6">Phase 6</div>
+        <h2>Post-Publish Promotion</h2>
+        <p>Distribution, community building, and boosting the video in the first 48 hours</p>
+      </div>
+      <div class="item-count">First 48 Hours</div>
+    </div>
+
+    <div class="check-groups">
+
+      <div class="check-group">
+        <div class="group-header">
+          <span class="group-emoji">📣</span>
+          <span class="group-title">Immediate Distribution (First 2 Hours)</span>
+          <span class="group-badge badge-grow">Growth Critical</span>
+        </div>
+        <ul class="check-list">
+          <li class="check-item">
+            <div class="checkbox" onclick="toggle(this)"></div>
+            <div class="item-content">
+              <div class="item-main">Post the video link in your <strong>Telegram channel</strong> with a 2-line hook (not just the link)</div>
+              <div class="item-note">Write: "New video out! ఈ video లో [key benefit]. Click చేసి చూడండి 👇 [link]". A compelling message gets 3x more clicks than just the link.</div>
+            </div>
+          </li>
+          <li class="check-item">
+            <div class="checkbox" onclick="toggle(this)"></div>
+            <div class="item-content">
+              <div class="item-main">Share in <strong>WhatsApp communities and groups</strong> — your own community first, then relevant Telugu groups</div>
+              <div class="item-note">Do NOT spam every group with every video. Share only in groups where the topic is directly relevant. Share as a message, not just a forwarded link.</div>
+            </div>
+          </li>
+          <li class="check-item">
+            <div class="checkbox" onclick="toggle(this)"></div>
+            <div class="item-content">
+              <div class="item-main">Post the video (or a 30-sec clip) to <strong>Instagram Reels</strong> with telugu hashtags and bio link</div>
+              <div class="item-note">Hashtags to use: #TeluguTech #TeluguCreator #AIToolsTelugu #CanvaTelugu #DigitalMarketingTelugu</div>
+            </div>
+          </li>
+          <li class="check-item">
+            <div class="checkbox" onclick="toggle(this)"></div>
+            <div class="item-content">
+              <div class="item-main">Post a <strong>Community tab update</strong> on YouTube — announce the video with the thumbnail image</div>
+              <div class="item-note">Community posts notify subscribers who have bell turned off. This is a secondary notification system — don't skip it.</div>
+            </div>
+          </li>
+          <li class="check-item">
+            <div class="checkbox" onclick="toggle(this)"></div>
+            <div class="item-content">
+              <div class="item-main">Share in 2–3 <strong>relevant Telugu Facebook groups</strong> with a question or context, not just the link</div>
+              <div class="item-note">Example post: "AI తో content writing చేయడం easy అవుతుందా? నేను try చేసాను — results surprising గా ఉన్నాయి. Full video ఇక్కడ చూడండి 👇"</div>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <div class="check-group">
+        <div class="group-header">
+          <span class="group-emoji">💬</span>
+          <span class="group-title">Engagement (First 48 Hours)</span>
+          <span class="group-badge badge-grow">Growth Critical</span>
+        </div>
+        <ul class="check-list">
+          <li class="check-item">
+            <div class="checkbox" onclick="toggle(this)"></div>
+            <div class="item-content">
+              <div class="item-main"><strong>Reply to every single comment</strong> within 24 hours of publishing</div>
+              <div class="item-note">This signals to YouTube that your video has high engagement. The algorithm rewards videos where viewers comment AND the creator responds — it shows community health.</div>
+            </div>
+          </li>
+          <li class="check-item">
+            <div class="checkbox" onclick="toggle(this)"></div>
+            <div class="item-content">
+              <div class="item-main">Pin a <strong>comment from yourself</strong> asking a question or sharing a key takeaway to drive comment engagement</div>
+              <div class="item-note">Example: "మీకు ఈ tool useful గా అనిపించిందా? Comment లో చెప్పండి! 👇 Also, next video గురించి topic suggest చేయండి." Questions generate 4x more comments than statements.</div>
+            </div>
+          </li>
+          <li class="check-item">
+            <div class="checkbox" onclick="toggle(this)"></div>
+            <div class="item-content">
+              <div class="item-main">Heart/like the <strong>best comments</strong> in the first 24 hours to reward engaged viewers</div>
+            </div>
+          </li>
+          <li class="check-item">
+            <div class="checkbox" onclick="toggle(this)"></div>
+            <div class="item-content">
+              <div class="item-main">Upload the <strong>2 Shorts</strong> from this video (if not already done) — space them out: 1 on publish day, 1 two days later</div>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <div class="check-group">
+        <div class="group-header">
+          <span class="group-emoji">🔁</span>
+          <span class="group-title">Cross-Platform Repurposing</span>
+          <span class="group-badge badge-pro">Pro Move</span>
+        </div>
+        <ul class="check-list">
+          <li class="check-item">
+            <div class="checkbox" onclick="toggle(this)"></div>
+            <div class="item-content">
+              <div class="item-main">Write a <strong>LinkedIn post</strong> summarizing the top 3 learnings from the video (targeting Telugu professionals)</div>
+              <div class="item-note">LinkedIn Telugu creator content is extremely underserved. A single viral LinkedIn post can add 50–100 subscribers from a completely new audience segment.</div>
+            </div>
+          </li>
+          <li class="check-item">
+            <div class="checkbox" onclick="toggle(this)"></div>
+            <div class="item-content">
+              <div class="item-main">Create a <strong>story on Instagram</strong> with a swipe-up link or "link in bio" CTA for the new video</div>
+            </div>
+          </li>
+          <li class="check-item">
+            <div class="checkbox" onclick="toggle(this)"></div>
+            <div class="item-content">
+              <div class="item-main">If applicable, share the video in any <strong>Reddit communities or Discord servers</strong> for Telugu creators or tech enthusiasts</div>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════
+       PHASE 7: ANALYTICS REVIEW
+  ════════════════════════════════════════════════════ -->
+  <div class="divider"></div>
+  <div class="section" data-phase="p7">
+    <div class="section-head">
+      <div class="section-icon c7">📊</div>
+      <div class="section-title-wrap">
+        <div class="section-phase c7">Phase 7</div>
+        <h2>Analytics & Optimization Review</h2>
+        <p>Learn from each video to make the next one perform better — review weekly & monthly</p>
+      </div>
+      <div class="item-count">48hrs + 7 Days After</div>
+    </div>
+
+    <div class="check-groups">
+
+      <div class="check-group">
+        <div class="group-header">
+          <span class="group-emoji">📊</span>
+          <span class="group-title">48-Hour Performance Check</span>
+          <span class="group-badge badge-must">Must Do</span>
+        </div>
+        <ul class="check-list">
+          <li class="check-item">
+            <div class="checkbox" onclick="toggle(this)"></div>
+            <div class="item-content">
+              <div class="item-main">Check <strong>Click-Through Rate (CTR)</strong> — target is above 4% for established channels, 2–3% is okay when starting</div>
+              <div class="item-note">If CTR is below 2%: change the thumbnail immediately. YouTube will show your new thumbnail to the next batch of impressions.</div>
+            </div>
+          </li>
+          <li class="check-item">
+            <div class="checkbox" onclick="toggle(this)"></div>
+            <div class="item-content">
+              <div class="item-main">Check <strong>Average View Duration (AVD)</strong> — target is above 40% of total video length</div>
+              <div class="item-note">If AVD is below 30%, review the audience retention graph to find the exact drop-off point. That moment is either boring, confusing, or too long.</div>
+            </div>
+          </li>
+          <li class="check-item">
+            <div class="checkbox" onclick="toggle(this)"></div>
+            <div class="item-content">
+              <div class="item-main">Check <strong>traffic sources</strong> — what percentage is from YouTube Search vs Suggested vs External?</div>
+              <div class="item-note">High Search traffic = SEO is working. High Suggested traffic = algorithm is recommending you. Low of both = promote more externally and revisit keywords.</div>
+            </div>
+          </li>
+          <li class="check-item">
+            <div class="checkbox" onclick="toggle(this)"></div>
+            <div class="item-content">
+              <div class="item-main">If CTR is below 2.5%, swap the <strong>thumbnail to your alternate version</strong> and test for another 48 hours</div>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <div class="check-group">
+        <div class="group-header">
+          <span class="group-emoji">📅</span>
+          <span class="group-title">Weekly Analytics Habit</span>
+          <span class="group-badge badge-must">Must Do</span>
+        </div>
+        <ul class="check-list">
+          <li class="check-item">
+            <div class="checkbox" onclick="toggle(this)"></div>
+            <div class="item-content">
+              <div class="item-main">Every Sunday: review the <strong>top-performing video of the week</strong> — what made it work?</div>
+              <div class="item-note">Look at: which traffic source drove the most views, what the CTR was, where retention peaked. Replicate what worked in your next video.</div>
+            </div>
+          </li>
+          <li class="check-item">
+            <div class="checkbox" onclick="toggle(this)"></div>
+            <div class="item-content">
+              <div class="item-main">Note the <strong>exact drop-off points</strong> in the Audience Retention graph for this week's video</div>
+              <div class="item-note">Common drop-off causes: too slow intro (fix: cut intro by 30%), long tangents (fix: stay tighter to the topic), unrelated section (fix: remove it).</div>
+            </div>
+          </li>
+          <li class="check-item">
+            <div class="checkbox" onclick="toggle(this)"></div>
+            <div class="item-content">
+              <div class="item-main">Check <strong>subscriber count growth</strong> — which video drove the most new subscribers this week?</div>
+              <div class="item-note">The top subscriber-driving video reveals what your audience truly wants. Plan more content in that exact style and topic area immediately.</div>
+            </div>
+          </li>
+          <li class="check-item">
+            <div class="checkbox" onclick="toggle(this)"></div>
+            <div class="item-content">
+              <div class="item-main">Review <strong>top comments and questions</strong> — pick 1 comment that becomes next week's video topic</div>
+              <div class="item-note">Viewer questions are pre-validated video ideas. When someone asks "ఇది free లో చేయగలమా?" — that's your next video title: "Free లో [topic] ఎలా చేయాలి".</div>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <div class="check-group">
+        <div class="group-header">
+          <span class="group-emoji">🗓️</span>
+          <span class="group-title">Monthly Deep Review</span>
+          <span class="group-badge badge-pro">Pro Move</span>
+        </div>
+        <ul class="check-list">
+          <li class="check-item">
+            <div class="checkbox" onclick="toggle(this)"></div>
+            <div class="item-content">
+              <div class="item-main">Compare <strong>Watch Time hours vs last month</strong> — track progress toward 4,000 hours YPP threshold</div>
+            </div>
+          </li>
+          <li class="check-item">
+            <div class="checkbox" onclick="toggle(this)"></div>
+            <div class="item-content">
+              <div class="item-main">Review <strong>affiliate link clicks and conversions</strong> — which videos drove the most affiliate income?</div>
+            </div>
+          </li>
+          <li class="check-item">
+            <div class="checkbox" onclick="toggle(this)"></div>
+            <div class="item-content">
+              <div class="item-main">Identify your <strong>top 3 performing videos</strong> and plan sequels, updated versions, or related topics</div>
+            </div>
+          </li>
+          <li class="check-item">
+            <div class="checkbox" onclick="toggle(this)"></div>
+            <div class="item-content">
+              <div class="item-main">Review your <strong>content pillar balance</strong> — are you posting evenly across AI, Canva, Editing, and Social Media?</div>
+            </div>
+          </li>
+          <li class="check-item">
+            <div class="checkbox" onclick="toggle(this)"></div>
+            <div class="item-content">
+              <div class="item-main">Set <strong>next month's content calendar</strong> — 4 main videos + 8 Shorts minimum, topics keyword-validated</div>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <div class="tip-box teal">
+        <span class="tip-icon">📈</span>
+        <div><strong>The 1% Improvement Rule:</strong> After each video, identify one specific thing to improve — audio quality, thumbnail, hook, or pacing. Improving 1% per video compounds dramatically. After 50 videos, your content quality will be unrecognizable from where you started.</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <span><strong>Telugu Creator Channel</strong> · Tools Tutorials & Tips</span>
+    <span id="footer-progress">0 of 0 items completed</span>
+  </div>
+
+</div>
+
+<script>
+  // Count all checkboxes and update totals
+  const phases = ['p1','p2','p3','p4','p5','p6','p7'];
+
+  function countItems() {
+    const sections = document.querySelectorAll('.section');
+    let totals = {};
+    phases.forEach(p => totals[p] = { total: 0, done: 0 });
+
+    sections.forEach(section => {
+      const phase = section.dataset.phase;
+      const items = section.querySelectorAll('.check-item');
+      if (totals[phase] !== undefined) {
+        totals[phase].total += items.length;
+        items.forEach(item => {
+          if (item.querySelector('.checkbox.checked')) totals[phase].done++;
+        });
+      }
+    });
+
+    let grandTotal = 0, grandDone = 0;
+    phases.forEach(p => {
+      grandTotal += totals[p].total;
+      grandDone += totals[p].done;
+      const el = document.getElementById(p + '-count');
+      if (el) el.textContent = totals[p].done + '/' + totals[p].total;
+    });
+
+    document.getElementById('total-count').textContent = grandTotal + '+';
+    document.getElementById('total-display').textContent = grandTotal;
+    document.getElementById('progress-text').textContent = grandDone + ' / ' + grandTotal + ' completed';
+    document.getElementById('footer-progress').textContent = grandDone + ' of ' + grandTotal + ' items completed';
+    const pct = grandTotal ? Math.round((grandDone / grandTotal) * 100) : 0;
+    document.getElementById('progress-fill').style.width = pct + '%';
+  }
+
+  function toggle(el) {
+    el.classList.toggle('checked');
+    const item = el.closest('.check-item');
+    if (item) item.classList.toggle('completed', el.classList.contains('checked'));
+    countItems();
+  }
+
+  // Initial count
+  window.addEventListener('DOMContentLoaded', countItems);
+</script>
+</body>
+</html>
